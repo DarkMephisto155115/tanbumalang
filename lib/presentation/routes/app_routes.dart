@@ -7,6 +7,8 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTRASI = _Paths.REGISTRASI;
   static const VERIFIKASI = _Paths.VERIFIKASI;
+  static const MUTASI = _Paths.MUTASI;
+  static const INFO = _Paths.INFO;
 }
 
 abstract class _Paths {
@@ -15,4 +17,6 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTRASI = '/registrasi';
   static const VERIFIKASI = '/verifikasi';
+  static const MUTASI = '/mutasi';
+  static const INFO = '/info';
 }

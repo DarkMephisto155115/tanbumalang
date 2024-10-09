@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[200], // Latar belakang hijau muda
+      backgroundColor: Colors.green[300], // Latar belakang hijau muda
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -67,7 +67,8 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Logika login
-                  Get.toNamed(Routes.HOME);
+                  // Get.toNamed(Routes.HOME);
+                  Get.offAllNamed(Routes.HOME);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.yellow, // Warna latar tombol

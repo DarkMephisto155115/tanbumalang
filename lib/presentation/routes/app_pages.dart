@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:tanbumalang/presentation/bindings/main_binding.dart';
 import 'package:tanbumalang/presentation/pages/home_page.dart';
+import 'package:tanbumalang/presentation/pages/info_page.dart';
 import 'package:tanbumalang/presentation/pages/login_page.dart';
+import 'package:tanbumalang/presentation/pages/mutasi_page.dart';
 import 'package:tanbumalang/presentation/pages/registration_page.dart';
 import 'package:tanbumalang/presentation/pages/verification_page.dart';
 part 'app_routes.dart';
@@ -14,7 +16,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomePage(),
       binding: MenuBinding(),
     ),
     GetPage(
@@ -30,6 +32,16 @@ class AppPages {
     GetPage(
       name: _Paths.VERIFIKASI,
       page: () => VerificationPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.MUTASI,
+      page: () => MutasiPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.INFO,
+      page: () => InfoPage(),
       binding: MenuBinding(),
     ),
   ];
