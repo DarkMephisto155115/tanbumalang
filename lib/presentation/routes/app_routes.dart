@@ -9,6 +9,8 @@ abstract class Routes {
   static const VERIFIKASI = _Paths.VERIFIKASI;
   static const MUTASI = _Paths.MUTASI;
   static const INFO = _Paths.INFO;
+  static const PROFIL = _Paths.PROFIL;
+  static const QRSCAN = _Paths.QRSCAN;
 }
 
 abstract class _Paths {
@@ -19,4 +21,6 @@ abstract class _Paths {
   static const VERIFIKASI = '/verifikasi';
   static const MUTASI = '/mutasi';
   static const INFO = '/info';
+  static const PROFIL = '/profil';
+  static const QRSCAN = '/qrscan';
 }

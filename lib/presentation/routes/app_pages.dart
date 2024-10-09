@@ -4,8 +4,11 @@ import 'package:tanbumalang/presentation/pages/home_page.dart';
 import 'package:tanbumalang/presentation/pages/info_page.dart';
 import 'package:tanbumalang/presentation/pages/login_page.dart';
 import 'package:tanbumalang/presentation/pages/mutasi_page.dart';
+import 'package:tanbumalang/presentation/pages/profil_page.dart';
 import 'package:tanbumalang/presentation/pages/registration_page.dart';
 import 'package:tanbumalang/presentation/pages/verification_page.dart';
+
+import '../pages/qr_scanner_page.dart';
 part 'app_routes.dart';
 
 class AppPages {
@@ -44,5 +47,15 @@ class AppPages {
       page: () => InfoPage(),
       binding: MenuBinding(),
     ),
+    GetPage(
+      name: _Paths.PROFIL,
+      page: () => ProfilePage(),
+      binding: MenuBinding(),
+    ),
+    // GetPage(
+    //   name: _Paths.QRSCAN,
+    //   page: () => QRScannerPage(),
+    //   binding: MenuBinding(),
+    // ),
   ];
 }

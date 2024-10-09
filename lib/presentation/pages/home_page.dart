@@ -14,19 +14,18 @@ class _HomePageState extends State<HomePage> {
       _selectedIndex = index;// Update the selected index
       switch (index) {
         case 0: // Home
-
           break;
         case 1: // Mutasi
           Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
           break;
         case 2: // QR
-          //TBA
+          Navigator.pushReplacementNamed(context, '/qrscan');
           break;
         case 3: // Info
           Navigator.pushReplacementNamed(context, '/info'); // Update the route name
           break;
         case 4: // Profile
-          Navigator.pushReplacementNamed(context, '/profile'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
           break;
       }
     });

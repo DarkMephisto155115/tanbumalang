@@ -86,7 +86,7 @@ class InfoPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        currentIndex: 3, // Set to the index of the current page
+        currentIndex: 3,
         onTap: (index) {
           switch (index) {
             case 0: // Home
@@ -102,7 +102,7 @@ class InfoPage extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/info'); // Update the route name
               break;
             case 4: // Profile
-              Navigator.pushReplacementNamed(context, '/profile'); // Update the route name
+              Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
               break;
           }
         },

@@ -32,7 +32,7 @@ class _MutasiPageState extends State<MutasiPage> {
         Navigator.pushReplacementNamed(context, '/info'); // Update the route name
         break;
       case 4: // Profile
-        Navigator.pushReplacementNamed(context, '/profile'); // Update the route name
+        Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
         break;
     }
   }
