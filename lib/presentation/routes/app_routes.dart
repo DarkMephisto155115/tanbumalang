@@ -11,6 +11,10 @@ abstract class Routes {
   static const INFO = _Paths.INFO;
   static const PROFIL = _Paths.PROFIL;
   static const QRSCAN = _Paths.QRSCAN;
+  static const BIODATA = _Paths.BIODATA;
+  static const LAPOR = _Paths.LAPOR;
+  static const CHAT = _Paths.CHAT;
+  static const ABOUTUS = _Paths.ABOUTUS;
 }
 
 abstract class _Paths {
@@ -23,4 +27,8 @@ abstract class _Paths {
   static const INFO = '/info';
   static const PROFIL = '/profil';
   static const QRSCAN = '/qrscan';
+  static const BIODATA = '/biodata';
+  static const LAPOR = '/lapor';
+  static const CHAT = '/chat';
+  static const ABOUTUS = '/aboutus';
 }

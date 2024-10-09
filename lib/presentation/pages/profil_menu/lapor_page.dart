@@ -1,72 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../routes/app_pages.dart';
-
-class ProfilePage extends StatelessWidget {
+class LaporPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Profile'),
+        title: Text('Lapor'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Back button
+          },
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Custom logo
+            child: Image.asset('assets/logo.png', width: 50, height: 50),
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Menu Item 1
-            MenuItem(
-              icon: Icons.person,
-              title: 'Biodata',
-              onTap: () {
-                Navigator.pushNamed(context, '/biodata'); // Change to your route
-              },
+            TextField(
+              maxLines: 5,
+              decoration: InputDecoration(
+                hintText: 'Tulis laporan!!!',
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 2),
+                ),
+              ),
             ),
-            Divider(), // Divider between items
-            // Menu Item 2
-            MenuItem(
-              icon: Icons.report,
-              title: 'Lapor',
-              onTap: () {
-                // Handle Lapor tap
-                Navigator.pushNamed(context, '/lapor'); // Change to your route
+            SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black, backgroundColor: Colors.yellow[300], // Text color
+              ),
+              onPressed: () {
+                // Add logic for submitting the report
               },
-            ),
-            Divider(), // Divider between items
-            // Menu Item 3
-            MenuItem(
-              icon: Icons.chat,
-              title: 'Chat Admin',
-              onTap: () {
-                // Handle Chat Admin tap
-                // Navigator.pushNamed(context, '/chat'); // Change to your route
-              },
-            ),
-            Divider(), // Divider between items
-            // Menu Item 4
-            MenuItem(
-              icon: Icons.info,
-              title: 'Tentang Kami',
-              onTap: () {
-                // Handle Tentang Kami tap
-                Navigator.pushNamed(context, '/aboutus'); // Change to your route
-              },
-            ),
-            Divider(), // Divider between items
-            // Menu Item 5
-            MenuItem(
-              icon: Icons.exit_to_app,
-              title: 'Keluar',
-              onTap: () {
-                Get.offAllNamed(Routes.LOGIN);
-              },
+              child: Text('Kirim Laporan'),
             ),
           ],
         ),
@@ -135,28 +111,6 @@ class ProfilePage extends StatelessWidget {
           }
         },
       ),
-    );
-  }
-}
-
-// Custom widget for Menu Item
-class MenuItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback onTap; // Callback for onTap
-
-  MenuItem({
-    required this.icon,
-    required this.title,
-    required this.onTap, // Add required onTap parameter
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, size: 30),
-      title: Text(title, style: TextStyle(fontSize: 18)),
-      onTap: onTap, // Trigger onTap callback when tapped
     );
   }
 }

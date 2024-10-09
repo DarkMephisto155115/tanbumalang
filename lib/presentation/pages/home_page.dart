@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         case 4: // Profile
           Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
           break;
-      }
+      }//Yeah i know there is a better way to do this, but i want to sleep. SO FUCK OFF!!!
     });
   }
 

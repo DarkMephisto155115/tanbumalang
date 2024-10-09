@@ -1,72 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../routes/app_pages.dart';
-
-class ProfilePage extends StatelessWidget {
+class BiodataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Profile'),
+        title: Text('Biodata'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Custom logo
+            child: Image.asset('assets/logo.png', width: 50, height: 50),
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Menu Item 1
-            MenuItem(
+            CircleAvatar(
+              radius: 50, // Size of the avatar
+              backgroundColor: Colors.grey[300], // Placeholder color
+              child: Icon(Icons.person, size: 50, color: Colors.grey[700]), // Placeholder icon
+            ),
+            SizedBox(height: 20),
+            buildBiodataItem(
               icon: Icons.person,
-              title: 'Biodata',
-              onTap: () {
-                Navigator.pushNamed(context, '/biodata'); // Change to your route
-              },
+              label: "Nama",
+              value: "Alex Chadnra Kusuma",
             ),
-            Divider(), // Divider between items
-            // Menu Item 2
-            MenuItem(
-              icon: Icons.report,
-              title: 'Lapor',
-              onTap: () {
-                // Handle Lapor tap
-                Navigator.pushNamed(context, '/lapor'); // Change to your route
-              },
+            SizedBox(height: 10),
+            buildBiodataItem(
+              icon: Icons.school,
+              label: "Prodi",
+              value: "Hukum",
             ),
-            Divider(), // Divider between items
-            // Menu Item 3
-            MenuItem(
-              icon: Icons.chat,
-              title: 'Chat Admin',
-              onTap: () {
-                // Handle Chat Admin tap
-                // Navigator.pushNamed(context, '/chat'); // Change to your route
-              },
+            SizedBox(height: 10),
+            buildBiodataItem(
+              icon: Icons.date_range,
+              label: "Angkatan",
+              value: "2022",
             ),
-            Divider(), // Divider between items
-            // Menu Item 4
-            MenuItem(
-              icon: Icons.info,
-              title: 'Tentang Kami',
-              onTap: () {
-                // Handle Tentang Kami tap
-                Navigator.pushNamed(context, '/aboutus'); // Change to your route
-              },
-            ),
-            Divider(), // Divider between items
-            // Menu Item 5
-            MenuItem(
-              icon: Icons.exit_to_app,
-              title: 'Keluar',
-              onTap: () {
-                Get.offAllNamed(Routes.LOGIN);
-              },
+            SizedBox(height: 10),
+            buildBiodataItem(
+              icon: Icons.email,
+              label: "Email",
+              value: "Haha@gmail.com",
             ),
           ],
         ),
@@ -137,26 +117,24 @@ class ProfilePage extends StatelessWidget {
       ),
     );
   }
-}
 
-// Custom widget for Menu Item
-class MenuItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback onTap; // Callback for onTap
-
-  MenuItem({
-    required this.icon,
-    required this.title,
-    required this.onTap, // Add required onTap parameter
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, size: 30),
-      title: Text(title, style: TextStyle(fontSize: 18)),
-      onTap: onTap, // Trigger onTap callback when tapped
+  // Helper method to build each biodata item
+  Widget buildBiodataItem({required IconData icon, required String label, required String value}) {
+    return Row(
+      children: [
+        Icon(icon, size: 24),
+        SizedBox(width: 16),
+        Expanded(
+          child: TextFormField(
+            initialValue: value,
+            decoration: InputDecoration(
+              labelText: label,
+              border: OutlineInputBorder(),
+            ),
+            readOnly: true, // Make the fields non-editable for now
+          ),
+        ),
+      ],
     );
   }
 }

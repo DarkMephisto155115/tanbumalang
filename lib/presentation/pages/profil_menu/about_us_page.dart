@@ -1,72 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../routes/app_pages.dart';
-
-class ProfilePage extends StatelessWidget {
+class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Profile'),
+        title: Text('Tentang Kami'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context); // Back button action
+          },
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Custom logo
+            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo asset
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Menu Item 1
-            MenuItem(
-              icon: Icons.person,
-              title: 'Biodata',
-              onTap: () {
-                Navigator.pushNamed(context, '/biodata'); // Change to your route
-              },
+            Container(
+              width: double.infinity,
+              height: 150,
+              color: Colors.grey[300],
+              child: Center(
+                child: Text(
+                  'Foto',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
-            Divider(), // Divider between items
-            // Menu Item 2
-            MenuItem(
-              icon: Icons.report,
-              title: 'Lapor',
-              onTap: () {
-                // Handle Lapor tap
-                Navigator.pushNamed(context, '/lapor'); // Change to your route
-              },
+            SizedBox(height: 16),
+            Text(
+              'Himpunan Mahasiswa Kabupaten Tanah Bumbu ialah wadah aktualisasi bagi kawan-kawan mahasiswa yang sedang menuntut ilmu pengetahuan di perguruan tinggi. Organisasi non-politik yang berfungsi menyambung tali persaudaraan antara mahasiswa agar terciptanya ukhuwah dan kerukunan, demi tercapainya SDM yang berkualitas.',
+              style: TextStyle(fontSize: 16),
             ),
-            Divider(), // Divider between items
-            // Menu Item 3
-            MenuItem(
-              icon: Icons.chat,
-              title: 'Chat Admin',
-              onTap: () {
-                // Handle Chat Admin tap
-                // Navigator.pushNamed(context, '/chat'); // Change to your route
-              },
-            ),
-            Divider(), // Divider between items
-            // Menu Item 4
-            MenuItem(
-              icon: Icons.info,
-              title: 'Tentang Kami',
-              onTap: () {
-                // Handle Tentang Kami tap
-                Navigator.pushNamed(context, '/aboutus'); // Change to your route
-              },
-            ),
-            Divider(), // Divider between items
-            // Menu Item 5
-            MenuItem(
-              icon: Icons.exit_to_app,
-              title: 'Keluar',
-              onTap: () {
-                Get.offAllNamed(Routes.LOGIN);
-              },
+            SizedBox(height: 16),
+            Container(
+              width: double.infinity,
+              height: 200,
+              color: Colors.grey[300],
+              child: Image.asset(
+                'assets/map_image.png', // Static map image asset (replace with your map asset)
+                fit: BoxFit.cover,
+              ),
             ),
           ],
         ),
@@ -135,28 +118,6 @@ class ProfilePage extends StatelessWidget {
           }
         },
       ),
-    );
-  }
-}
-
-// Custom widget for Menu Item
-class MenuItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final VoidCallback onTap; // Callback for onTap
-
-  MenuItem({
-    required this.icon,
-    required this.title,
-    required this.onTap, // Add required onTap parameter
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, size: 30),
-      title: Text(title, style: TextStyle(fontSize: 18)),
-      onTap: onTap, // Trigger onTap callback when tapped
     );
   }
 }
