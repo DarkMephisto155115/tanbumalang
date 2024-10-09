@@ -1,6 +1,6 @@
 # tanbumalang
 
-A new Flutter project.
+Tubes Mobile
 
 ## Getting Started
 
