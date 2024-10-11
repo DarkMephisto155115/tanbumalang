@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:tanbumalang/presentation/bindings/main_binding.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/absen_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/keungan_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/program_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/struktur_page.dart';
 import 'package:tanbumalang/presentation/pages/home_page.dart';
 import 'package:tanbumalang/presentation/pages/info_page.dart';
 import 'package:tanbumalang/presentation/pages/login_page.dart';
@@ -85,6 +88,21 @@ class AppPages {
     GetPage(
       name: _Paths.ABSEN,
       page: () => AbsenPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.KEUANGAN,
+      page: () => KeuanganPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROGRAM,
+      page: () => ProgramPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.STRUKTUR,
+      page: () => StrukturPage(),
       binding: MenuBinding(),
     ),
   ];

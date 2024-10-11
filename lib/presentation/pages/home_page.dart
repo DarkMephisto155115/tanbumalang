@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     // Action for 'Struktural'
-                    Navigator.pushNamed(context, '/struktural'); // Example of navigation
+                    Navigator.pushNamed(context, '/struktur'); // Example of navigation
                   },
                   child: buildMenuItem('assets/struktural.png', 'Struktural'),
                 ),

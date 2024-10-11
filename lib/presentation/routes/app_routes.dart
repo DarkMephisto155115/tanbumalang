@@ -16,6 +16,9 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const ABOUTUS = _Paths.ABOUTUS;
   static const ABSEN = _Paths.ABSEN;
+  static const KEUANGAN = _Paths.KEUANGAN;
+  static const PROGRAM = _Paths.PROGRAM;
+  static const STRUKTUR = _Paths.STRUKTUR;
 }
 
 abstract class _Paths {
@@ -33,4 +36,7 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const ABOUTUS = '/aboutus';
   static const ABSEN = '/absen';
+  static const KEUANGAN = '/keuangan';
+  static const PROGRAM = '/program';
+  static const STRUKTUR = '/struktur';
 }
