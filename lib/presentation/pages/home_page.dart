@@ -73,11 +73,41 @@ class _HomePageState extends State<HomePage> {
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
               children: [
-                buildMenuItem('assets/jadwal.png', 'Jadwal'),
-                buildMenuItem('assets/keuangan.png', 'Keuangan'),
-                buildMenuItem('assets/absen.png', 'Absen'),
-                buildMenuItem('assets/program.png', 'Program'),
-                buildMenuItem('assets/struktural.png', 'Struktural'),
+                GestureDetector(
+                  onTap: () {
+                    // Action for 'Jadwal'
+                    Navigator.pushNamed(context, '/jadwal'); // Example of navigation
+                  },
+                  child: buildMenuItem('assets/jadwal.png', 'Jadwal'),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Action for 'Keuangan'
+                    Navigator.pushNamed(context, '/keuangan'); // Example of navigation
+                  },
+                  child: buildMenuItem('assets/keuangan.png', 'Keuangan'),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Action for 'Absen'
+                    Navigator.pushNamed(context, '/absen'); // Example of navigation
+                  },
+                  child: buildMenuItem('assets/absen.png', 'Absen'),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Action for 'Program'
+                    Navigator.pushNamed(context, '/program'); // Example of navigation
+                  },
+                  child: buildMenuItem('assets/program.png', 'Program'),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Action for 'Struktural'
+                    Navigator.pushNamed(context, '/struktural'); // Example of navigation
+                  },
+                  child: buildMenuItem('assets/struktural.png', 'Struktural'),
+                ),
               ],
             ),
           ),

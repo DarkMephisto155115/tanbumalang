@@ -15,6 +15,7 @@ abstract class Routes {
   static const LAPOR = _Paths.LAPOR;
   static const CHAT = _Paths.CHAT;
   static const ABOUTUS = _Paths.ABOUTUS;
+  static const ABSEN = _Paths.ABSEN;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const LAPOR = '/lapor';
   static const CHAT = '/chat';
   static const ABOUTUS = '/aboutus';
+  static const ABSEN = '/absen';
 }

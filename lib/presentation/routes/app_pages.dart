@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
 import 'package:tanbumalang/presentation/bindings/main_binding.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/absen_page.dart';
 import 'package:tanbumalang/presentation/pages/home_page.dart';
 import 'package:tanbumalang/presentation/pages/info_page.dart';
 import 'package:tanbumalang/presentation/pages/login_page.dart';
 import 'package:tanbumalang/presentation/pages/mutasi_page.dart';
 import 'package:tanbumalang/presentation/pages/profil_menu/biodata_page.dart';
+import 'package:tanbumalang/presentation/pages/profil_menu/chat_admin_page.dart';
 import 'package:tanbumalang/presentation/pages/profil_menu/lapor_page.dart';
 import 'package:tanbumalang/presentation/pages/profil_page.dart';
 import 'package:tanbumalang/presentation/pages/registration_page.dart';
@@ -72,12 +74,17 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () => ProfilePage(),
+      page: () => ChatAdminPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.ABOUTUS,
       page: () => AboutUsPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABSEN,
+      page: () => AbsenPage(),
       binding: MenuBinding(),
     ),
   ];

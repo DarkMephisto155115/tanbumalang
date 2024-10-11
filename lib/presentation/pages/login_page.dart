@@ -77,6 +77,19 @@ class LoginPage extends StatelessWidget {
                 child: Text("Login"),
               ),
               SizedBox(height: 20),
+              // Tombol Login
+              ElevatedButton(
+                onPressed: () {
+                  // Logika login
+                  Get.offAllNamed(Routes.HOME);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.yellow, // Warna latar tombol
+                  foregroundColor: Colors.black, // Warna teks tombol
+                ),
+                child: Text("Login Admin"),
+              ),
+              SizedBox(height: 20),
 
               // Teks untuk navigasi ke halaman register
               GestureDetector(

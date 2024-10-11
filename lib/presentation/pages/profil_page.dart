@@ -46,7 +46,7 @@ class ProfilePage extends StatelessWidget {
               title: 'Chat Admin',
               onTap: () {
                 // Handle Chat Admin tap
-                // Navigator.pushNamed(context, '/chat'); // Change to your route
+                Navigator.pushNamed(context, '/chat'); // Change to your route
               },
             ),
             Divider(), // Divider between items

@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../element/mutasi_element.dart'; // Make sure you have this file with TransactionItem defined
+import 'package:intl/intl.dart'; // Add intl for date formatting
+import '../element/mutasi_element.dart'; // Ensure you have this file with TransactionItem defined
 
 class MutasiPage extends StatefulWidget {
   @override
@@ -10,6 +9,99 @@ class MutasiPage extends StatefulWidget {
 
 class _MutasiPageState extends State<MutasiPage> {
   int _selectedIndex = 1; // Current index of the bottom navigation bar
+  String _selectedRange = 'Hari ini'; // Default selection for time range
+  List<TransactionItem> transactions = []; // Full transaction list
+  List<TransactionItem> filteredTransactions = []; // Filtered list based on selected time range
+
+  DateTime? _selectedDate; // Variable for storing the selected date
+  DateTime? _selectedMonth; // Variable for storing the selected month
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize your transaction list (or get it from an API/DB)
+    transactions = [
+      TransactionItem(date: '2024-10-11', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
+      TransactionItem(date: '2024-10-10', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
+      TransactionItem(date: '2024-09-02', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
+      TransactionItem(date: '2024-09-01', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
+      // Add more transactions as needed
+    ];
+    // Apply initial filtering
+    filterTransactions();
+  }
+
+  void filterTransactions() {
+    setState(() {
+      DateTime now = DateTime.now();
+      filteredTransactions = transactions; // Default to showing all
+
+      if (_selectedRange == 'Hari ini') {
+        filteredTransactions = transactions.where((transaction) {
+          DateTime transactionDate = DateTime.parse(transaction.date);
+          return transactionDate.year == now.year &&
+              transactionDate.month == now.month &&
+              transactionDate.day == now.day;
+        }).toList();
+      } else if (_selectedRange == '7 Hari Terakhir') {
+        filteredTransactions = transactions.where((transaction) {
+          DateTime transactionDate = DateTime.parse(transaction.date);
+          return now.difference(transactionDate).inDays <= 7;
+        }).toList();
+      } else if (_selectedRange == 'Pilih Bulan' && _selectedMonth != null) {
+        filteredTransactions = transactions.where((transaction) {
+          DateTime transactionDate = DateTime.parse(transaction.date);
+          return transactionDate.year == _selectedMonth!.year &&
+              transactionDate.month == _selectedMonth!.month;
+        }).toList();
+      } else if (_selectedRange == 'Pilih Tanggal' && _selectedDate != null) {
+        filteredTransactions = transactions.where((transaction) {
+          DateTime transactionDate = DateTime.parse(transaction.date);
+          return transactionDate.year == _selectedDate!.year &&
+              transactionDate.month == _selectedDate!.month &&
+              transactionDate.day == _selectedDate!.day;
+        }).toList();
+      }
+    });
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020), // You can customize the range
+      lastDate: DateTime(2030),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        filterTransactions(); // Filter transactions based on selected date
+      });
+    }
+  }
+
+  Future<void> _selectMonth(BuildContext context) async {
+    final DateTime now = DateTime.now();
+    final DateTime firstDayOfMonth = DateTime(now.year, now.month, 1); // Set initialDate to the 1st of the current month
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: firstDayOfMonth, // Ensure the initial date satisfies the predicate
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+      helpText: 'Pilih Bulan', // Change the dialog title to "Select Month"
+      fieldLabelText: 'Pilih bulan dan tahun', // Customize the input label
+      selectableDayPredicate: (DateTime date) {
+        return date.day == 1; // Only the first day of each month is selectable
+      },
+    );
+    if (picked != null && picked != _selectedMonth) {
+      setState(() {
+        _selectedMonth = picked;
+        filterTransactions(); // Filter transactions based on selected month
+      });
+    }
+  }
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -17,22 +109,19 @@ class _MutasiPageState extends State<MutasiPage> {
     });
 
     // Add navigation logic based on the selected index
-    // You can use Navigator to go to different pages
     switch (index) {
       case 0: // Home
-        Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+        Navigator.pushReplacementNamed(context, '/home');
         break;
       case 1: // Mutasi
-
         break;
-      case 2: // QR
-      //TBA
+      case 2: // QR (Work on Progress)
         break;
       case 3: // Info
-        Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+        Navigator.pushReplacementNamed(context, '/info');
         break;
       case 4: // Profile
-        Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
+        Navigator.pushReplacementNamed(context, '/profil');
         break;
     }
   }
@@ -50,39 +139,78 @@ class _MutasiPageState extends State<MutasiPage> {
           ),
         ],
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                'Rentang Waktu (Work on Progress)',
+            // Rentang Waktu Section
+            ExpansionTile(
+              title: Text(
+                'Rentang Waktu',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+              children: [
+                // Radio buttons for time range selection inside the ExpansionTile
+                RadioListTile(
+                  title: Text('Hari ini'),
+                  value: 'Hari ini',
+                  groupValue: _selectedRange,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedRange = value!;
+                      filterTransactions(); // Filter transactions based on selection
+                    });
+                  },
+                ),
+                RadioListTile(
+                  title: Text('7 Hari Terakhir'),
+                  value: '7 Hari Terakhir',
+                  groupValue: _selectedRange,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedRange = value!;
+                      filterTransactions(); // Filter transactions based on selection
+                    });
+                  },
+                ),
+                RadioListTile(
+                  title: Text('Pilih Bulan'),
+                  value: 'Pilih Bulan',
+                  groupValue: _selectedRange,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedRange = value!;
+                      _selectMonth(context); // Open month picker
+                    });
+                  },
+                ),
+                RadioListTile(
+                  title: Text('Pilih Tanggal'),
+                  value: 'Pilih Tanggal',
+                  groupValue: _selectedRange,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedRange = value!;
+                      _selectDate(context); // Open date picker
+                    });
+                  },
+                ),
+              ],
             ),
             SizedBox(height: 20),
+            // Display filtered transactions
             Expanded(
-              child: ListView(
-                children: [
-                  TransactionItem(
-                    date: '21 Sep 2024',
-                    description: 'Pembayaran Himpunan',
-                    amount: '-Rp 20.000,00',
-                  ),
-                  TransactionItem(
-                    date: '01 Sep 2024',
-                    description: 'Pembayaran Asrama',
-                    amount: '-Rp 500.000,00',
-                  ),
-                ],
+              child: ListView.builder(
+                itemCount: filteredTransactions.length,
+                itemBuilder: (context, index) {
+                  final transaction = filteredTransactions[index];
+                  return TransactionItem(
+                    date: transaction.date,
+                    description: transaction.description,
+                    amount: transaction.amount,
+                  );
+                },
               ),
             ),
           ],
@@ -134,7 +262,7 @@ class _MutasiPageState extends State<MutasiPage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped, // Call the function on tap
+        onTap: _onItemTapped,
       ),
     );
   }
