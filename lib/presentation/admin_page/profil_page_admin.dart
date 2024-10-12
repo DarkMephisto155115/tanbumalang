@@ -1,55 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class AboutUsPage extends StatelessWidget {
+import '../routes/app_pages.dart';
+
+class ProfilePageAdmin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: const Text('Tentang Kami'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // Back button action
-          },
-        ),
+        title: const Text('Profile'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo asset
+            child: Image.asset('assets/logo.png', width: 50, height: 50), // Custom logo
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
-            Container(
-              width: double.infinity,
-              height: 150,
-              color: Colors.grey[300],
-              child: const Center(
-                child: const Text(
-                  'Foto',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ),
+            // Menu Item 1
+            MenuItem(
+              icon: Icons.person,
+              title: 'Biodata',
+              onTap: () {
+                Navigator.pushNamed(context, '/biodata'); // Change to your route
+              },
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'Himpunan Mahasiswa Kabupaten Tanah Bumbu ialah wadah aktualisasi bagi kawan-kawan mahasiswa yang sedang menuntut ilmu pengetahuan di perguruan tinggi. Organisasi non-politik yang berfungsi menyambung tali persaudaraan antara mahasiswa agar terciptanya ukhuwah dan kerukunan, demi tercapainya SDM yang berkualitas.',
-              style: TextStyle(fontSize: 16),
+            const Divider(), // Divider between items
+            // Menu Item 2
+            MenuItem(
+              icon: Icons.report,
+              title: 'Laporan',
+              onTap: () {
+                // Handle Lapor tap
+                Navigator.pushNamed(context, '/lapor'); // Change to your route
+              },
             ),
-            const SizedBox(height: 16),
-            Container(
-              width: double.infinity,
-              height: 200,
-              color: Colors.grey[300],
-              child: Image.asset(
-                'assets/map_image.png', // Static map image asset (replace with your map asset)
-                fit: BoxFit.cover,
-              ),
+            const Divider(), // Divider between items
+            // Menu Item 3
+            MenuItem(
+              icon: Icons.chat,
+              title: 'Chat Admin',
+              onTap: () {
+                // Handle Chat Admin tap
+                Navigator.pushNamed(context, '/chat'); // Change to your route
+              },
+            ),
+            const Divider(), // Divider between items
+            // Menu Item 4
+            MenuItem(
+              icon: Icons.info,
+              title: 'Tentang Kami',
+              onTap: () {
+                // Handle Tentang Kami tap
+                Navigator.pushNamed(context, '/aboutus'); // Change to your route
+              },
+            ),
+            const Divider(), // Divider between items
+            // Menu Item 5
+            MenuItem(
+              icon: Icons.exit_to_app,
+              title: 'Keluar',
+              onTap: () {
+                Get.offAllNamed(Routes.LOGIN);
+              },
             ),
           ],
         ),
@@ -118,6 +135,28 @@ class AboutUsPage extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+}
+
+// Custom widget for Menu Item
+class MenuItem extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap; // Callback for onTap
+
+  MenuItem({
+    required this.icon,
+    required this.title,
+    required this.onTap, // Add required onTap parameter
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon, size: 30),
+      title: Text(title, style: const TextStyle(fontSize: 18)),
+      onTap: onTap, // Trigger onTap callback when tapped
     );
   }
 }

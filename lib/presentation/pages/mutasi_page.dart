@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Add intl for date formatting
 import '../element/mutasi_element.dart'; // Ensure you have this file with TransactionItem defined
 
 class MutasiPage extends StatefulWidget {
@@ -21,10 +20,10 @@ class _MutasiPageState extends State<MutasiPage> {
     super.initState();
     // Initialize your transaction list (or get it from an API/DB)
     transactions = [
-      TransactionItem(date: '2024-10-11', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
-      TransactionItem(date: '2024-10-10', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
-      TransactionItem(date: '2024-09-02', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
-      TransactionItem(date: '2024-09-01', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
+      const TransactionItem(date: '2024-10-11', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
+      const TransactionItem(date: '2024-10-10', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
+      const TransactionItem(date: '2024-09-02', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
+      const TransactionItem(date: '2024-09-01', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
       // Add more transactions as needed
     ];
     // Apply initial filtering
@@ -131,7 +130,7 @@ class _MutasiPageState extends State<MutasiPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Mutasi'),
+        title: const Text('Mutasi'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -146,14 +145,14 @@ class _MutasiPageState extends State<MutasiPage> {
           children: [
             // Rentang Waktu Section
             ExpansionTile(
-              title: Text(
+              title: const Text(
                 'Rentang Waktu',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               children: [
                 // Radio buttons for time range selection inside the ExpansionTile
                 RadioListTile(
-                  title: Text('Hari ini'),
+                  title: const Text('Hari ini'),
                   value: 'Hari ini',
                   groupValue: _selectedRange,
                   onChanged: (value) {
@@ -164,7 +163,7 @@ class _MutasiPageState extends State<MutasiPage> {
                   },
                 ),
                 RadioListTile(
-                  title: Text('7 Hari Terakhir'),
+                  title: const Text('7 Hari Terakhir'),
                   value: '7 Hari Terakhir',
                   groupValue: _selectedRange,
                   onChanged: (value) {
@@ -175,7 +174,7 @@ class _MutasiPageState extends State<MutasiPage> {
                   },
                 ),
                 RadioListTile(
-                  title: Text('Pilih Bulan'),
+                  title: const Text('Pilih Bulan'),
                   value: 'Pilih Bulan',
                   groupValue: _selectedRange,
                   onChanged: (value) {
@@ -186,7 +185,7 @@ class _MutasiPageState extends State<MutasiPage> {
                   },
                 ),
                 RadioListTile(
-                  title: Text('Pilih Tanggal'),
+                  title: const Text('Pilih Tanggal'),
                   value: 'Pilih Tanggal',
                   groupValue: _selectedRange,
                   onChanged: (value) {
@@ -198,7 +197,7 @@ class _MutasiPageState extends State<MutasiPage> {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             // Display filtered transactions
             Expanded(
               child: ListView.builder(

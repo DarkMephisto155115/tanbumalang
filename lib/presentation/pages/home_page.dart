@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Home'),
+        title: const Text('Home'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -49,11 +49,11 @@ class _HomePageState extends State<HomePage> {
           Container(
             color: Colors.grey[300],
             width: double.infinity,
-            padding: EdgeInsets.all(16),
-            child: Row(
+            padding: const EdgeInsets.all(16),
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
+                const Row(
                   children: [
                     Text(
                       'Foto',
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: GridView.count(
               crossAxisCount: 3,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
               children: [
@@ -169,15 +169,15 @@ class _HomePageState extends State<HomePage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Colors.green),
           ),
           child: Image.asset(assetPath, width: 40, height: 40),
         ),
-        SizedBox(height: 8),
-        Text(label, style: TextStyle(fontSize: 16)),
+        const SizedBox(height: 8),
+        Text(label, style: const TextStyle(fontSize: 16)),
       ],
     );
   }

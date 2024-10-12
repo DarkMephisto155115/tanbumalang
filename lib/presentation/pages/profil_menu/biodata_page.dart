@@ -6,7 +6,7 @@ class BiodataPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Biodata'),
+        title: const Text('Biodata'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -24,25 +24,25 @@ class BiodataPage extends StatelessWidget {
               backgroundColor: Colors.grey[300], // Placeholder color
               child: Icon(Icons.person, size: 50, color: Colors.grey[700]), // Placeholder icon
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             buildBiodataItem(
               icon: Icons.person,
               label: "Nama",
               value: "Alex Chadnra Kusuma",
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             buildBiodataItem(
               icon: Icons.school,
               label: "Prodi",
               value: "Hukum",
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             buildBiodataItem(
               icon: Icons.date_range,
               label: "Angkatan",
               value: "2022",
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             buildBiodataItem(
               icon: Icons.email,
               label: "Email",
@@ -123,13 +123,13 @@ class BiodataPage extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, size: 24),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Expanded(
           child: TextFormField(
             initialValue: value,
             decoration: InputDecoration(
               labelText: label,
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
             readOnly: true, // Make the fields non-editable for now
           ),

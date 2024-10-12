@@ -1,8 +1,13 @@
 import 'package:get/get.dart';
+import 'package:tanbumalang/presentation/admin_page/admin_home_menu/absen_page_admin.dart';
+import 'package:tanbumalang/presentation/admin_page/home_page_admin.dart';
 import 'package:tanbumalang/presentation/bindings/main_binding.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/absen_page.dart';
-import 'package:tanbumalang/presentation/pages/home_menu/keungan_page.dart';
-import 'package:tanbumalang/presentation/pages/home_menu/program_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/keuangan/keungan_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/keuangan/pembayaran_asrama.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/program/asrama_program_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/program/himpunan_program_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/program/program_page.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/struktur_page.dart';
 import 'package:tanbumalang/presentation/pages/home_page.dart';
 import 'package:tanbumalang/presentation/pages/info_page.dart';
@@ -15,8 +20,9 @@ import 'package:tanbumalang/presentation/pages/profil_page.dart';
 import 'package:tanbumalang/presentation/pages/registration_page.dart';
 import 'package:tanbumalang/presentation/pages/verification_page.dart';
 
+import '../admin_page/admin_home_menu/location_page.dart';
+import '../pages/home_menu/keuangan/pembayaran_himpunan.dart';
 import '../pages/profil_menu/about_us_page.dart';
-import '../pages/qr_scanner_page.dart';
 part 'app_routes.dart';
 
 class AppPages {
@@ -96,13 +102,50 @@ class AppPages {
       binding: MenuBinding(),
     ),
     GetPage(
+      name: _Paths.PEMBAYARAN_ASRAMA,
+      page: () => PembayaranAsramaPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.PEMBAYARAN_HIMPUNAN,
+      page: () => PembayaranHimpunanPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
       name: _Paths.PROGRAM,
       page: () => ProgramPage(),
       binding: MenuBinding(),
     ),
     GetPage(
+      name: _Paths.PROGRAM_ASRAMA,
+      page: () => AsramaProgramPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROGRAM_HIMPUNAN,
+      page: () => HimpunanProgramPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
       name: _Paths.STRUKTUR,
       page: () => StrukturPage(),
+      binding: MenuBinding(),
+    ),
+
+    //ADMIN
+    GetPage(
+      name: _Paths.HOME_ADMIN,
+      page: () => HomePageAdmin(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABSEN_ADMIN,
+      page: () => AbsenPageAdmin(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOCATION,
+      page: () => LocationPage(),
       binding: MenuBinding(),
     ),
   ];

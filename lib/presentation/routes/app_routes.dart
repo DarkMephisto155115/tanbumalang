@@ -17,8 +17,16 @@ abstract class Routes {
   static const ABOUTUS = _Paths.ABOUTUS;
   static const ABSEN = _Paths.ABSEN;
   static const KEUANGAN = _Paths.KEUANGAN;
+  static const PEMBAYARAN_ASRAMA = _Paths.PEMBAYARAN_ASRAMA;
+  static const PEMBAYARAN_HIMPUNAN = _Paths.PEMBAYARAN_HIMPUNAN;
   static const PROGRAM = _Paths.PROGRAM;
+  static const PROGRAM_ASRAMA = _Paths.PROGRAM_ASRAMA;
+  static const PROGRAM_HIMPUNAN = _Paths.PROGRAM_HIMPUNAN;
   static const STRUKTUR = _Paths.STRUKTUR;
+  //ADMIN
+  static const HOME_ADMIN = _Paths.HOME_ADMIN;
+  static const ABSEN_ADMIN = _Paths.ABSEN_ADMIN;
+  static const LOCATION = _Paths.LOCATION;
 }
 
 abstract class _Paths {
@@ -37,6 +45,14 @@ abstract class _Paths {
   static const ABOUTUS = '/aboutus';
   static const ABSEN = '/absen';
   static const KEUANGAN = '/keuangan';
+  static const PEMBAYARAN_ASRAMA = '/pembayaran_asrama';
+  static const PEMBAYARAN_HIMPUNAN = '/pembayaran_himpunan';
   static const PROGRAM = '/program';
+  static const PROGRAM_ASRAMA = '/program_asrama';
+  static const PROGRAM_HIMPUNAN = '/program_himpunan';
   static const STRUKTUR = '/struktur';
+  //ADMIN
+  static const HOME_ADMIN = '/home_admin';
+  static const ABSEN_ADMIN = '/absen_admin';
+  static const LOCATION = '/location';
 }

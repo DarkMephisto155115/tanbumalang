@@ -6,7 +6,7 @@ class InfoPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Info'),
+        title: const Text('Info'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -17,7 +17,7 @@ class InfoPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
-          children: [
+          children: const [
             // Info Card 1
             InfoCard(
               title: 'Pendaftaran Universitas Muhammadiyah Malang',
@@ -116,12 +116,12 @@ class InfoCard extends StatelessWidget {
   final String title;
   final String description;
 
-  InfoCard({required this.title, required this.description});
+  const InfoCard({required this.title, required this.description});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.grey[300],
         borderRadius: BorderRadius.circular(8),
@@ -131,18 +131,18 @@ class InfoCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 8), // Space between title and description
+          const SizedBox(height: 8), // Space between title and description
           Text(
             description,
-            style: TextStyle(fontSize: 14),
+            style: const TextStyle(fontSize: 14),
           ),
-          SizedBox(height: 8), // Space between description and photo
+          const SizedBox(height: 8), // Space between description and photo
           Container(
             height: 100, // Placeholder height for photo
             color: Colors.grey[400], // Placeholder color for the photo
-            child: Center(child: Text('Foto', style: TextStyle(color: Colors.white))),
+            child: const Center(child: Text('Foto', style: TextStyle(color: Colors.white))),
           ),
         ],
       ),

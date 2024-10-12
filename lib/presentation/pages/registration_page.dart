@@ -15,8 +15,8 @@ class RegistrationPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("SIGN UP", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              SizedBox(height: 30),
+              const Text("SIGN UP", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 30),
 
               // Email Field
               Container(
@@ -24,14 +24,14 @@ class RegistrationPage extends StatelessWidget {
                   color: Colors.white, // Latar belakang putih
                   borderRadius: BorderRadius.circular(5), // Sudut melengkung
                 ),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                     labelText: 'Email',
                     border: UnderlineInputBorder(), // Garis bawah
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Username Field
               Container(
@@ -39,14 +39,14 @@ class RegistrationPage extends StatelessWidget {
                   color: Colors.white, // Latar belakang putih
                   borderRadius: BorderRadius.circular(5), // Sudut melengkung
                 ),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                     labelText: 'Username',
                     border: UnderlineInputBorder(), // Garis bawah
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Password Field
               Container(
@@ -54,7 +54,7 @@ class RegistrationPage extends StatelessWidget {
                   color: Colors.white, // Latar belakang putih
                   borderRadius: BorderRadius.circular(5), // Sudut melengkung
                 ),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                     labelText: 'Password',
                     border: UnderlineInputBorder(), // Garis bawah
@@ -62,7 +62,7 @@ class RegistrationPage extends StatelessWidget {
                   obscureText: true,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Prodi Field
               Container(
@@ -70,14 +70,14 @@ class RegistrationPage extends StatelessWidget {
                   color: Colors.white, // Latar belakang putih
                   borderRadius: BorderRadius.circular(5), // Sudut melengkung
                 ),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                     labelText: 'Prodi',
                     border: UnderlineInputBorder(), // Garis bawah
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Angkatan Field
               Container(
@@ -85,14 +85,14 @@ class RegistrationPage extends StatelessWidget {
                   color: Colors.white, // Latar belakang putih
                   borderRadius: BorderRadius.circular(5), // Sudut melengkung
                 ),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                     labelText: 'Angkatan',
                     border: UnderlineInputBorder(), // Garis bawah
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Register Button
               ElevatedButton(
@@ -105,7 +105,7 @@ class RegistrationPage extends StatelessWidget {
                   backgroundColor: Colors.yellow, // menggantikan 'primary'
                   foregroundColor: Colors.black, // menggantikan 'onPrimary'
                 ),
-                child: Text("Register"),
+                child: const Text("Register"),
               ),
             ],
           ),

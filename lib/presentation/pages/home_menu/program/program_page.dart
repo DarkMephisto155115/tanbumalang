@@ -37,7 +37,7 @@ class _ProgramPageState extends State<ProgramPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Program'),
+        title: const Text('Program'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -61,10 +61,10 @@ class _ProgramPageState extends State<ProgramPage> {
                     GestureDetector(
                       onTap: () {
                         // Action when 'Asrama' is tapped
-                        Navigator.pushNamed(context, '/asrama');
+                        Navigator.pushNamed(context, '/program_asrama');
                       },
                       child: Container(
-                        margin: EdgeInsets.only(right: 16), // Space between boxes
+                        margin: const EdgeInsets.only(right: 16), // Space between boxes
                         child: SizedBox(
                           width: 70, // Fixed width
                           height: 70, // Fixed height
@@ -77,8 +77,8 @@ class _ProgramPageState extends State<ProgramPage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset('assets/asrama_icon.png', width: 30, height: 30), // Asrama icon
-                                SizedBox(height: 4), // Reduced spacing
-                                Text('Asrama', style: TextStyle(fontSize: 12)), // Smaller text
+                                const SizedBox(height: 4), // Reduced spacing
+                                const Text('Asrama', style: TextStyle(fontSize: 12)), // Smaller text
                               ],
                             ),
                           ),
@@ -90,7 +90,7 @@ class _ProgramPageState extends State<ProgramPage> {
                     GestureDetector(
                       onTap: () {
                         // Action when 'Himpunan' is tapped
-                        Navigator.pushNamed(context, '/himpunan');
+                        Navigator.pushNamed(context, '/program_himpunan');
                       },
                       child: SizedBox(
                         width: 70, // Fixed width
@@ -104,8 +104,8 @@ class _ProgramPageState extends State<ProgramPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset('assets/himpunan_icon.png', width: 30, height: 30), // Himpunan icon
-                              SizedBox(height: 4), // Reduced spacing
-                              Text('Himpunan', style: TextStyle(fontSize: 12)), // Smaller text
+                              const SizedBox(height: 4), // Reduced spacing
+                              const Text('Himpunan', style: const TextStyle(fontSize: 12)), // Smaller text
                             ],
                           ),
                         ),

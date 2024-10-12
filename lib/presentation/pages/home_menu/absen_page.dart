@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
 
-class AbsenPage extends StatelessWidget {
+class AbsenPage extends StatefulWidget {
+  @override
+  _AbsenPageState createState() => _AbsenPageState();
+}
+
+class _AbsenPageState extends State<AbsenPage> {
+  // TextEditingController untuk menampung input dari user
+  final TextEditingController _namaController = TextEditingController();
+  final TextEditingController _angkatanController = TextEditingController();
+  final TextEditingController _fakultasController = TextEditingController();
+  final TextEditingController _jurusanController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Jangan lupa untuk dispose controller ketika tidak diperlukan lagi
+    _namaController.dispose();
+    _angkatanController.dispose();
+    _fakultasController.dispose();
+    _jurusanController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Absensi'),
+        title: const Text('Absensi'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -21,7 +42,7 @@ class AbsenPage extends StatelessWidget {
           children: [
             // Header section for name, faculty, department, and year
             Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(8),
@@ -31,22 +52,60 @@ class AbsenPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Nama : ', style: TextStyle(fontSize: 16)),
-                      Text('Angkatan : ', style: TextStyle(fontSize: 16)),
+                      // Nama Input
+                      Expanded(
+                        child: TextFormField(
+                          controller: _namaController,
+                          decoration: const InputDecoration(
+                            labelText: 'Nama',
+                            border: const OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      // Angkatan Input
+                      Expanded(
+                        child: TextFormField(
+                          controller: _angkatanController,
+                          decoration: const InputDecoration(
+                            labelText: 'Angkatan',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Fakultas : ', style: TextStyle(fontSize: 16)),
-                      Text('Jurusan : ', style: TextStyle(fontSize: 16)),
+                      // Fakultas Input
+                      Expanded(
+                        child: TextFormField(
+                          controller: _fakultasController,
+                          decoration: const InputDecoration(
+                            labelText: 'Fakultas',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      // Jurusan Input
+                      Expanded(
+                        child: TextFormField(
+                          controller: _jurusanController,
+                          decoration: const InputDecoration(
+                            labelText: 'Jurusan',
+                            border: OutlineInputBorder(),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Table for attendance
             Expanded(
@@ -54,23 +113,23 @@ class AbsenPage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
                   columns: [
-                    DataColumn(label: Text('No')),
-                    DataColumn(label: Text('Nama')),
-                    DataColumn(label: Text('Tanggal')),
-                    DataColumn(label: Text('Hadir')),
+                    const DataColumn(label: Text('No')),
+                    const DataColumn(label: Text('Nama')),
+                    const DataColumn(label: Text('Tanggal')),
+                    const DataColumn(label: Text('Hadir')),
                   ],
                   rows: List.generate(7, (index) {
                     return DataRow(cells: [
                       DataCell(Text((index + 1).toString())), // No
                       DataCell(Text('Nama $index')), // Nama (replace with dynamic data)
-                      DataCell(Text('dd-mm-yyyy')), // Tanggal (replace with dynamic data)
+                      const DataCell(Text('dd-mm-yyyy')), // Tanggal (replace with dynamic data)
                       DataCell(Checkbox(value: false, onChanged: (val) {})), // Hadir
                     ]);
                   }),
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Buttons at the bottom
             Row(
@@ -83,7 +142,7 @@ class AbsenPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pop(context); // Go back
                   },
-                  child: Text('< Kembali'),
+                  child: const Text('< Kembali'),
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -92,9 +151,8 @@ class AbsenPage extends StatelessWidget {
                   onPressed: () {
                     // Handle submit action
                   },
-                  child: Text('Submit'),
+                  child: const Text('Submit'),
                 ),
-
               ],
             ),
           ],

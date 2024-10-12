@@ -11,7 +11,7 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
     {'text': 'Tanya apa kak?', 'isUserMessage': false, 'time': '2:01pm'},
   ];
 
-  TextEditingController _messageController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
 
   void _sendMessage() {
     if (_messageController.text.isNotEmpty) {
@@ -32,12 +32,12 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
       appBar: AppBar(
         backgroundColor: Colors.green[300],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Go back to the previous screen
           },
         ),
-        title: Text('Chat Admin'),
+        title: const Text('Chat Admin'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -48,8 +48,8 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
       body: Column(
         children: [
           // Status Text
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Connected to Admin',
               style: TextStyle(color: Colors.grey),
@@ -65,8 +65,8 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: messages[index]['isUserMessage']
                           ? Colors.green[100]
@@ -78,7 +78,7 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
                       children: [
                         Text(
                           messages[index]['text'],
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                         Align(
                           alignment: Alignment.bottomRight,
@@ -111,16 +111,16 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
                     ),
                   ),
                 ),
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 GestureDetector(
                   onTap: _sendMessage,
                   child: Container(
-                    padding: EdgeInsets.all(12),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Colors.green[300],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.send,
                       color: Colors.white,
                     ),

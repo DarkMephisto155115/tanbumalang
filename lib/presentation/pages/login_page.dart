@@ -15,24 +15,24 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("SIGN IN", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              SizedBox(height: 30),
+              const Text("SIGN IN", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 30),
 
               // Kotak email dan password dengan sudut melengkung
               Container(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
                   color: Colors.white, // Latar belakang putih untuk kotak
                   borderRadius: BorderRadius.circular(15), // Sudut melengkung
                   boxShadow: [
-                    BoxShadow(
+                    const BoxShadow(
                       color: Colors.black12,
                       blurRadius: 6.0,
                       offset: Offset(0, 2),
                     ),
                   ],
                 ),
-                child: Column(
+                child: const Column(
                   children: [
                     // TextField untuk Email
                     TextField(
@@ -56,12 +56,12 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 10),
-              Align(
+              const SizedBox(height: 10),
+              const Align(
                 alignment: Alignment.centerRight,
                 child: Text('Forgot Password?', style: TextStyle(color: Colors.blue)),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Tombol Login
               ElevatedButton(
@@ -74,22 +74,22 @@ class LoginPage extends StatelessWidget {
                   backgroundColor: Colors.yellow, // Warna latar tombol
                   foregroundColor: Colors.black, // Warna teks tombol
                 ),
-                child: Text("Login"),
+                child: const Text("Login"),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Tombol Login
               ElevatedButton(
                 onPressed: () {
                   // Logika login
-                  Get.offAllNamed(Routes.HOME);
+                  Get.offAllNamed(Routes.HOME_ADMIN);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.yellow, // Warna latar tombol
                   foregroundColor: Colors.black, // Warna teks tombol
                 ),
-                child: Text("Login Admin"),
+                child: const Text("Login Admin"),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Teks untuk navigasi ke halaman register
               GestureDetector(
@@ -97,7 +97,7 @@ class LoginPage extends StatelessWidget {
                   // Get.to(() => RegisterView());
                   Get.toNamed(Routes.REGISTRASI);
                 },
-                child: Text("Don't Have Account? Signup", style: TextStyle(color: Colors.blue)),
+                child: const Text("Don't Have Account? Signup", style: TextStyle(color: Colors.blue)),
               ),
             ],
           ),

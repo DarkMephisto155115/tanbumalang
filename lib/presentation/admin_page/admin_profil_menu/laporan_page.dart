@@ -1,55 +1,48 @@
 import 'package:flutter/material.dart';
 
-class AboutUsPage extends StatelessWidget {
+class LaporanPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: const Text('Tentang Kami'),
+        title: const Text('Lapor'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Back button action
+            Navigator.pop(context); // Back button
           },
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo asset
+            child: Image.asset('assets/logo.png', width: 50, height: 50),
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              width: double.infinity,
-              height: 150,
-              color: Colors.grey[300],
-              child: const Center(
-                child: const Text(
-                  'Foto',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            const TextField(
+              maxLines: 5,
+              decoration: InputDecoration(
+                hintText: 'Tulis laporan!!!',
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 2),
                 ),
               ),
             ),
-            const SizedBox(height: 16),
-            const Text(
-              'Himpunan Mahasiswa Kabupaten Tanah Bumbu ialah wadah aktualisasi bagi kawan-kawan mahasiswa yang sedang menuntut ilmu pengetahuan di perguruan tinggi. Organisasi non-politik yang berfungsi menyambung tali persaudaraan antara mahasiswa agar terciptanya ukhuwah dan kerukunan, demi tercapainya SDM yang berkualitas.',
-              style: TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              width: double.infinity,
-              height: 200,
-              color: Colors.grey[300],
-              child: Image.asset(
-                'assets/map_image.png', // Static map image asset (replace with your map asset)
-                fit: BoxFit.cover,
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black, backgroundColor: Colors.yellow[300], // Text color
               ),
+              onPressed: () {
+                // Add logic for submitting the report
+              },
+              child: const Text('Kirim Laporan'),
             ),
           ],
         ),

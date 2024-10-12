@@ -6,9 +6,9 @@ class LaporPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Lapor'),
+        title: const Text('Lapor'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Back button
           },
@@ -25,7 +25,7 @@ class LaporPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextField(
+            const TextField(
               maxLines: 5,
               decoration: InputDecoration(
                 hintText: 'Tulis laporan!!!',
@@ -34,7 +34,7 @@ class LaporPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black, backgroundColor: Colors.yellow[300], // Text color
@@ -42,7 +42,7 @@ class LaporPage extends StatelessWidget {
               onPressed: () {
                 // Add logic for submitting the report
               },
-              child: Text('Kirim Laporan'),
+              child: const Text('Kirim Laporan'),
             ),
           ],
         ),

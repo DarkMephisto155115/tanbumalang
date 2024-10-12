@@ -15,8 +15,8 @@ class VerificationPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Verification", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-              SizedBox(height: 30),
+              const Text("Verification", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -27,7 +27,7 @@ class VerificationPage extends StatelessWidget {
                   _buildVerificationBox(), // Total 5 kotak verifikasi
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   // Setelah verifikasi selesai, kembalikan ke halaman login
@@ -38,7 +38,7 @@ class VerificationPage extends StatelessWidget {
                   backgroundColor: Colors.yellow, // background
                   foregroundColor: Colors.black, // foreground
                 ),
-                child: Text("Verify"),
+                child: const Text("Verify"),
               ),
             ],
           ),
@@ -56,7 +56,7 @@ class VerificationPage extends StatelessWidget {
         border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Center(
+      child: const Center(
         child: TextField(
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,

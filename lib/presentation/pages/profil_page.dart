@@ -9,7 +9,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: Text('Profile'),
+        title: const Text('Profile'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -29,7 +29,7 @@ class ProfilePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/biodata'); // Change to your route
               },
             ),
-            Divider(), // Divider between items
+            const Divider(), // Divider between items
             // Menu Item 2
             MenuItem(
               icon: Icons.report,
@@ -39,7 +39,7 @@ class ProfilePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/lapor'); // Change to your route
               },
             ),
-            Divider(), // Divider between items
+            const Divider(), // Divider between items
             // Menu Item 3
             MenuItem(
               icon: Icons.chat,
@@ -49,7 +49,7 @@ class ProfilePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/chat'); // Change to your route
               },
             ),
-            Divider(), // Divider between items
+            const Divider(), // Divider between items
             // Menu Item 4
             MenuItem(
               icon: Icons.info,
@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/aboutus'); // Change to your route
               },
             ),
-            Divider(), // Divider between items
+            const Divider(), // Divider between items
             // Menu Item 5
             MenuItem(
               icon: Icons.exit_to_app,
@@ -145,7 +145,7 @@ class MenuItem extends StatelessWidget {
   final String title;
   final VoidCallback onTap; // Callback for onTap
 
-  MenuItem({
+  const MenuItem({
     required this.icon,
     required this.title,
     required this.onTap, // Add required onTap parameter
@@ -155,7 +155,7 @@ class MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon, size: 30),
-      title: Text(title, style: TextStyle(fontSize: 18)),
+      title: Text(title, style: const TextStyle(fontSize: 18)),
       onTap: onTap, // Trigger onTap callback when tapped
     );
   }
