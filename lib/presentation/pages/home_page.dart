@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Row(
+                Row(
                   children: [
                     Text(
                       'Foto',

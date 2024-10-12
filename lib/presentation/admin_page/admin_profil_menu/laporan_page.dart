@@ -1,49 +1,28 @@
 import 'package:flutter/material.dart';
 
-class LaporanPage extends StatelessWidget {
+
+class LaporanUserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: const Text('Lapor'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // Back button
-          },
-        ),
+        title: const Text('Laporan User'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50),
+            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo image
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const TextField(
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: 'Tulis laporan!!!',
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black, width: 2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black, backgroundColor: Colors.yellow[300], // Text color
-              ),
-              onPressed: () {
-                // Add logic for submitting the report
-              },
-              child: const Text('Kirim Laporan'),
-            ),
+            _buildLaporanCard('user9101', 'Tidak dapat melakukan absensi'),
+            const SizedBox(height: 16), // Spacing between cards
+            _buildLaporanCard('user8621', 'Qrcode jika diklik terjadi error'),
           ],
         ),
       ),
@@ -110,6 +89,33 @@ class LaporanPage extends StatelessWidget {
             case 4: // Profile
           }
         },
+      ),
+    );
+  }
+
+  Widget _buildLaporanCard(String username, String laporan) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.black),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            username,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Laporan :',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+          Text(laporan),
+        ],
       ),
     );
   }

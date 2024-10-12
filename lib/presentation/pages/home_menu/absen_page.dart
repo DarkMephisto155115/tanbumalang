@@ -58,7 +58,7 @@ class _AbsenPageState extends State<AbsenPage> {
                           controller: _namaController,
                           decoration: const InputDecoration(
                             labelText: 'Nama',
-                            border: const OutlineInputBorder(),
+                            border: OutlineInputBorder(),
                           ),
                         ),
                       ),
@@ -112,11 +112,11 @@ class _AbsenPageState extends State<AbsenPage> {
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: DataTable(
-                  columns: [
-                    const DataColumn(label: Text('No')),
-                    const DataColumn(label: Text('Nama')),
-                    const DataColumn(label: Text('Tanggal')),
-                    const DataColumn(label: Text('Hadir')),
+                  columns: const [
+                    DataColumn(label: Text('No')),
+                    DataColumn(label: Text('Nama')),
+                    DataColumn(label: Text('Tanggal')),
+                    DataColumn(label: Text('Hadir')),
                   ],
                   rows: List.generate(7, (index) {
                     return DataRow(cells: [

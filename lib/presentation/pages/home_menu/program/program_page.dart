@@ -105,7 +105,7 @@ class _ProgramPageState extends State<ProgramPage> {
                             children: [
                               Image.asset('assets/himpunan_icon.png', width: 30, height: 30), // Himpunan icon
                               const SizedBox(height: 4), // Reduced spacing
-                              const Text('Himpunan', style: const TextStyle(fontSize: 12)), // Smaller text
+                              const Text('Himpunan', style: TextStyle(fontSize: 12)), // Smaller text
                             ],
                           ),
                         ),

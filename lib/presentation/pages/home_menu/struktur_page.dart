@@ -78,7 +78,7 @@ class _StrukturPageState extends State<StrukturPage> {
                               children: [
                                 Image.asset('assets/asrama_icon.png', width: 30, height: 30), // Asrama icon
                                 const SizedBox(height: 4), // Reduced spacing
-                                const Text('Asrama', style: const TextStyle(fontSize: 12)), // Smaller text
+                                const Text('Asrama', style: TextStyle(fontSize: 12)), // Smaller text
                               ],
                             ),
                           ),

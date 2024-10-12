@@ -30,7 +30,7 @@ class AboutUsPage extends StatelessWidget {
               height: 150,
               color: Colors.grey[300],
               child: const Center(
-                child: const Text(
+                child: Text(
                   'Foto',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),

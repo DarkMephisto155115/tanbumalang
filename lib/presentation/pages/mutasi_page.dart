@@ -147,7 +147,7 @@ class _MutasiPageState extends State<MutasiPage> {
             ExpansionTile(
               title: const Text(
                 'Rentang Waktu',
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               children: [
                 // Radio buttons for time range selection inside the ExpansionTile

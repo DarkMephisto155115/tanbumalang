@@ -29,8 +29,8 @@ class _PembayaranAsramaState extends State<PembayaranAsramaPage> {
           },
         ),
         title: const Text('Keuangan', style: TextStyle(color: Colors.black)),
-        actions: [
-          const Padding(
+        actions: const [
+          Padding(
             padding: EdgeInsets.all(8.0),
             child: CircleAvatar(
               backgroundImage: AssetImage('assets/logo.png'), // Ensure the logo is added in assets

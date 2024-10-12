@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ChatAdminPage extends StatefulWidget {
+class ChatPage extends StatefulWidget {
   @override
-  _ChatAdminPageState createState() => _ChatAdminPageState();
+  _ChatPageState createState() => _ChatPageState();
 }
 
-class _ChatAdminPageState extends State<ChatAdminPage> {
+class _ChatPageState extends State<ChatPage> {
   List<Map<String, dynamic>> messages = [
     {'text': 'Min, boleh tanya?', 'isUserMessage': true, 'time': '2:00pm'},
     {'text': 'Tanya apa kak?', 'isUserMessage': false, 'time': '2:01pm'},
@@ -139,7 +139,7 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
         items: [
           BottomNavigationBarItem(
             icon: Image.asset('assets/icon_home.png', width: 24, height: 24),
-            label: 'Home',
+            label: 'Menu',
           ),
           BottomNavigationBarItem(
             icon: Image.asset('assets/icon_mutasi.png', width: 24, height: 24),
@@ -165,7 +165,7 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
                 ),
               ),
             ),
-            label: '', // No label for QR button
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Image.asset('assets/icon_info.png', width: 24, height: 24),
@@ -176,9 +176,23 @@ class _ChatAdminPageState extends State<ChatAdminPage> {
             label: 'Profile',
           ),
         ],
-        currentIndex: 1, // Adjust according to the navigation
+        currentIndex: 4, // Set to the index of the current page
         onTap: (index) {
-          // Handle navigation
+          switch (index) {
+            case 0: // Home
+              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+              break;
+            case 1: // Mutasi
+              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+              break;
+            case 2: // QR
+            //TBA
+              break;
+            case 3: // Info
+              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+              break;
+            case 4: // Profile
+          }
         },
       ),
     );

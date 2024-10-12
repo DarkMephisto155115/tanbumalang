@@ -36,17 +36,17 @@ class ProfilePageAdmin extends StatelessWidget {
               title: 'Laporan',
               onTap: () {
                 // Handle Lapor tap
-                Navigator.pushNamed(context, '/lapor'); // Change to your route
+                Navigator.pushNamed(context, '/laporan'); // Change to your route
               },
             ),
             const Divider(), // Divider between items
             // Menu Item 3
             MenuItem(
               icon: Icons.chat,
-              title: 'Chat Admin',
+              title: 'Chat User',
               onTap: () {
                 // Handle Chat Admin tap
-                Navigator.pushNamed(context, '/chat'); // Change to your route
+                Navigator.pushNamed(context, '/chat_admin'); // Change to your route
               },
             ),
             const Divider(), // Divider between items
@@ -145,7 +145,7 @@ class MenuItem extends StatelessWidget {
   final String title;
   final VoidCallback onTap; // Callback for onTap
 
-  MenuItem({
+  const MenuItem({
     required this.icon,
     required this.title,
     required this.onTap, // Add required onTap parameter

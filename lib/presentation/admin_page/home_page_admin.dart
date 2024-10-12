@@ -25,7 +25,7 @@ class _HomePageAdminState extends State<HomePageAdmin> {
           Navigator.pushReplacementNamed(context, '/info'); // Update the route name
           break;
         case 4: // Profile
-          Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/profil_admin'); // Update the route name
           break;
       }//Yeah i know there is a better way to do this, but i want to sleep. SO FUCK OFF!!!
     });
