@@ -42,12 +42,12 @@ class AppPages {
     GetPage(
       name: _Paths.LOGIN,
       page: () => LoginPage(),
-      binding: MenuBinding(),
+      binding: LoginBinding(),
     ),
     GetPage(
       name: _Paths.REGISTRASI,
       page: () => RegistrationPage(),
-      binding: MenuBinding(),
+      binding: RegistrationBinding(),
     ),
     GetPage(
       name: _Paths.VERIFIKASI,
@@ -77,7 +77,7 @@ class AppPages {
     GetPage(
       name: _Paths.BIODATA,
       page: () => BiodataPage(),
-      binding: MenuBinding(),
+      binding: BiodataBinding(),
     ),
     GetPage(
       name: _Paths.LAPOR,
