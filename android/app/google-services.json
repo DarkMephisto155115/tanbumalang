@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "856126588269",
+    "project_id": "tanbumalang",
+    "storage_bucket": "tanbumalang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856126588269:android:084f7a6ce97de6809f0664",
+        "android_client_info": {
+          "package_name": "com.example.tanbumalang"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6jUsxMVUPSRfZ3P16DJ6eVTd0vb2ypkQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
