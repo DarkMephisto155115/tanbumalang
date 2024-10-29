@@ -16,6 +16,7 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const ABOUTUS = _Paths.ABOUTUS;
   static const ABSEN = _Paths.ABSEN;
+  static const JADWAL = _Paths.JADWAL;
   static const KEUANGAN = _Paths.KEUANGAN;
   static const PEMBAYARAN_ASRAMA = _Paths.PEMBAYARAN_ASRAMA;
   static const PEMBAYARAN_HIMPUNAN = _Paths.PEMBAYARAN_HIMPUNAN;
@@ -47,6 +48,7 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const ABOUTUS = '/aboutus';
   static const ABSEN = '/absen';
+  static const JADWAL = '/jadwal';
   static const KEUANGAN = '/keuangan';
   static const PEMBAYARAN_ASRAMA = '/pembayaran_asrama';
   static const PEMBAYARAN_HIMPUNAN = '/pembayaran_himpunan';

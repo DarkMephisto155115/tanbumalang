@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tanbumalang/presentation/controller/biodata_controller.dart';
 
-
 class BiodataPage extends GetView<BiodataController> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,10 +20,10 @@ class BiodataPage extends GetView<BiodataController> {
       body: Obx(() {
         return Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Center( // Center the entire content
+          child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Center items vertically
-              crossAxisAlignment: CrossAxisAlignment.center, // Center items horizontally
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
                   radius: 50,
@@ -56,7 +56,7 @@ class BiodataPage extends GetView<BiodataController> {
                   icon: Icons.email,
                   label: "Email",
                   controller: controller.emailController,
-                  isReadOnly: !controller.isEditing.value,
+                  isReadOnly: true, // Make the email field read-only
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(

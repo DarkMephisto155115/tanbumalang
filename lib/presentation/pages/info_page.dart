@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 class InfoPage extends StatelessWidget {
+  final CollectionReference infoCollection = FirebaseFirestore.instance.collection('info');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,35 +14,44 @@ class InfoPage extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Custom logo
+            child: Image.asset('assets/logo.png', width: 50, height: 50),
           ),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: const [
-            // Info Card 1
-            InfoCard(
-              title: 'Pendaftaran Universitas Muhammadiyah Malang',
-              description:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec.',
-            ),
-            SizedBox(height: 16), // Space between cards
-            // Info Card 2
-            InfoCard(
-              title: 'Beasiswa Tanah Bumbu',
-              description:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec.',
-            ),
-            SizedBox(height: 16), // Space between cards
-            // Info Card 3
-            InfoCard(
-              title: 'Fundraising untuk Rakyat yang membutuhkan',
-              description:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec.',
-            ),
-          ],
+        child: StreamBuilder<QuerySnapshot>(
+          stream: infoCollection.snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return const Center(child: Text('Error loading data.'));
+            }
+            final documents = snapshot.data?.docs ?? [];
+
+            return ListView.builder(
+              itemCount: documents.length,
+              itemBuilder: (context, index) {
+                final infoData = documents[index].data() as Map<String, dynamic>;
+                final title = infoData['title'] ?? 'No Title';
+                final description = infoData['description'] ?? 'No Description';
+                final imageUrl = infoData['imageUrl'] ?? ''; // Image URL from Firestore
+
+                return Column(
+                  children: [
+                    InfoCard(
+                      title: title,
+                      description: description,
+                      imageUrl: imageUrl,
+                    ),
+                    const SizedBox(height: 16), // Space between cards
+                  ],
+                );
+              },
+            );
+          },
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -89,20 +102,20 @@ class InfoPage extends StatelessWidget {
         currentIndex: 3,
         onTap: (index) {
           switch (index) {
-            case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
               break;
-            case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi');
               break;
-            case 2: // QR
-            //TBA
+            case 2:
+            // Handle QR code
               break;
-            case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info');
               break;
-            case 4: // Profile
-              Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
+            case 4:
+              Navigator.pushReplacementNamed(context, '/profil');
               break;
           }
         },
@@ -111,12 +124,16 @@ class InfoPage extends StatelessWidget {
   }
 }
 
-// Custom widget for Info Card
 class InfoCard extends StatelessWidget {
   final String title;
   final String description;
+  final String imageUrl;
 
-  const InfoCard({required this.title, required this.description});
+  const InfoCard({
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -133,16 +150,24 @@ class InfoCard extends StatelessWidget {
             title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 8), // Space between title and description
+          const SizedBox(height: 8),
           Text(
             description,
             style: const TextStyle(fontSize: 14),
           ),
-          const SizedBox(height: 8), // Space between description and photo
-          Container(
-            height: 100, // Placeholder height for photo
-            color: Colors.grey[400], // Placeholder color for the photo
-            child: const Center(child: Text('Foto', style: TextStyle(color: Colors.white))),
+          const SizedBox(height: 8),
+          imageUrl.isNotEmpty
+              ? Image.network(
+            imageUrl,
+            height: 100,
+            fit: BoxFit.cover,
+          )
+              : Container(
+            height: 100,
+            color: Colors.grey[400],
+            child: const Center(
+              child: Text('No Image', style: TextStyle(color: Colors.white)),
+            ),
           ),
         ],
       ),

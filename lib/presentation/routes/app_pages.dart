@@ -24,6 +24,7 @@ import 'package:tanbumalang/presentation/pages/verification_page.dart';
 
 import '../admin_page/admin_home_menu/location_page.dart';
 import '../admin_page/admin_profil_menu/laporan_page.dart';
+import '../pages/home_menu/jadwal_page.dart';
 import '../pages/home_menu/keuangan/pembayaran_himpunan.dart';
 import '../pages/profil_menu/about_us_page.dart';
 part 'app_routes.dart';
@@ -82,7 +83,7 @@ class AppPages {
     GetPage(
       name: _Paths.LAPOR,
       page: () => LaporPage(),
-      binding: MenuBinding(),
+      binding: LaporBinding(),
     ),
     GetPage(
       name: _Paths.CHAT,
@@ -92,6 +93,11 @@ class AppPages {
     GetPage(
       name: _Paths.ABOUTUS,
       page: () => AboutUsPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.JADWAL,
+      page: () => KalenderPage(),
       binding: MenuBinding(),
     ),
     GetPage(

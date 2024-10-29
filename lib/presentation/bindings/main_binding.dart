@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:tanbumalang/presentation/controller/biodata_controller.dart';
+import 'package:tanbumalang/presentation/controller/lapor_controller.dart';
 import 'package:tanbumalang/presentation/controller/login_controller.dart';
 import 'package:tanbumalang/presentation/controller/registration_controller.dart';
 
@@ -46,6 +47,15 @@ class BiodataBinding extends Bindings{
   void dependencies() {
     Get.lazyPut<BiodataController>(
           () => BiodataController(),
+    );
+  }
+}
+
+class LaporBinding extends Bindings{
+  @override
+  void dependencies() {
+    Get.lazyPut<LaporController>(
+          () => LaporController(),
     );
   }
 }
