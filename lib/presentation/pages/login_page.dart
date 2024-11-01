@@ -77,8 +77,8 @@ class LoginPage extends GetView<LoginController> {
               // Tombol Login
               ElevatedButton(
                 onPressed: () {
-                  // controller.login();
-                  Get.offAllNamed('/home');
+                  controller.login();
+                  // Get.offAllNamed('/home');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.yellow, // Warna latar tombol

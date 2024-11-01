@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../element/mutasi_element.dart'; // Ensure you have this file with TransactionItem defined
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../element/mutasi_element.dart'; // Ensure this file defines TransactionItem
 
 class MutasiPage extends StatefulWidget {
   @override
@@ -7,33 +8,45 @@ class MutasiPage extends StatefulWidget {
 }
 
 class _MutasiPageState extends State<MutasiPage> {
-  int _selectedIndex = 1; // Current index of the bottom navigation bar
-  String _selectedRange = 'Hari ini'; // Default selection for time range
-  List<TransactionItem> transactions = []; // Full transaction list
-  List<TransactionItem> filteredTransactions = []; // Filtered list based on selected time range
+  int _selectedIndex = 1;
+  String _selectedRange = 'Hari ini';
+  List<TransactionItem> transactions = [];
+  List<TransactionItem> filteredTransactions = [];
 
-  DateTime? _selectedDate; // Variable for storing the selected date
-  DateTime? _selectedMonth; // Variable for storing the selected month
+  DateTime? _selectedDate;
+  DateTime? _selectedMonth;
 
   @override
   void initState() {
     super.initState();
-    // Initialize your transaction list (or get it from an API/DB)
-    transactions = [
-      const TransactionItem(date: '2024-10-11', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
-      const TransactionItem(date: '2024-10-10', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
-      const TransactionItem(date: '2024-09-02', description: 'Pembayaran Himpunan', amount: '-Rp 20.000,00'),
-      const TransactionItem(date: '2024-09-01', description: 'Pembayaran Asrama', amount: '-Rp 500.000,00'),
-      // Add more transactions as needed
-    ];
-    // Apply initial filtering
-    filterTransactions();
+    fetchTransactionsFromFirestore();
+  }
+
+  Future<void> fetchTransactionsFromFirestore() async {
+    try {
+      final QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('payments').get();
+      final List<TransactionItem> loadedTransactions = snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        return TransactionItem(
+          date: (data['timestamp'] as Timestamp).toDate().toString(),
+          description: data['name'] ?? '',
+          amount: data['amount'] ?? '',
+        );
+      }).toList();
+
+      setState(() {
+        transactions = loadedTransactions;
+        filterTransactions();
+      });
+    } catch (e) {
+      print('Error fetching transactions: $e');
+    }
   }
 
   void filterTransactions() {
     setState(() {
       DateTime now = DateTime.now();
-      filteredTransactions = transactions; // Default to showing all
+      filteredTransactions = transactions;
 
       if (_selectedRange == 'Hari ini') {
         filteredTransactions = transactions.where((transaction) {
@@ -63,7 +76,6 @@ class _MutasiPageState extends State<MutasiPage> {
       }
     });
   }
-
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
