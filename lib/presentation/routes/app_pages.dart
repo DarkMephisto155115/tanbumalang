@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:tanbumalang/presentation/admin_page/admin_home_menu/absen_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/admin_profil_menu/chat_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/home_page_admin.dart';
+import 'package:tanbumalang/presentation/admin_page/info_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/profil_page_admin.dart';
 import 'package:tanbumalang/presentation/bindings/main_binding.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/absen_page.dart';
@@ -10,7 +11,7 @@ import 'package:tanbumalang/presentation/pages/home_menu/keuangan/pembayaran_asr
 import 'package:tanbumalang/presentation/pages/home_menu/program/asrama_program_page.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/program/himpunan_program_page.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/program/program_page.dart';
-import 'package:tanbumalang/presentation/pages/home_menu/struktur_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/struktural/struktur_page.dart';
 import 'package:tanbumalang/presentation/pages/home_page.dart';
 import 'package:tanbumalang/presentation/pages/info_page.dart';
 import 'package:tanbumalang/presentation/pages/login_page.dart';
@@ -22,8 +23,11 @@ import 'package:tanbumalang/presentation/pages/profil_page.dart';
 import 'package:tanbumalang/presentation/pages/registration_page.dart';
 import 'package:tanbumalang/presentation/pages/verification_page.dart';
 
+import '../admin_page/admin_home_menu/admin_jadwal_page.dart';
 import '../admin_page/admin_home_menu/location_page.dart';
 import '../admin_page/admin_profil_menu/laporan_page.dart';
+// ignore: unused_import
+import '../controller/admin/admin_jadwal_controller.dart';
 import '../pages/home_menu/jadwal_page.dart';
 import '../pages/home_menu/keuangan/pembayaran_himpunan.dart';
 import '../pages/profil_menu/about_us_page.dart';
@@ -170,6 +174,16 @@ class AppPages {
     GetPage(
       name: _Paths.LAPORAN,
       page: () => LaporanUserPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.INFO_ADMIN,
+      page: () => InfoPageAdmin(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.JADWAL_ADMIN,
+      page: () => AdminJadwalPage(),
       binding: MenuBinding(),
     ),
   ];

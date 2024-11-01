@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'himpunan_struktur_page.dart';
+
 class StrukturPage extends StatefulWidget {
   @override
   _StrukturPageState createState() => _StrukturPageState();
@@ -90,7 +92,11 @@ class _StrukturPageState extends State<StrukturPage> {
                     GestureDetector(
                       onTap: () {
                         // Action when 'Himpunan' is tapped
-                        Navigator.pushNamed(context, '/himpunan');
+                        // Navigator.pushNamed(context, '/himpunan');
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => HimpunanStrukturPage()),
+                        );
                       },
                       child: SizedBox(
                         width: 70, // Fixed width
