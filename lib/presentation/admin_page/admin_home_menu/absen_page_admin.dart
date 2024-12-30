@@ -175,19 +175,19 @@ class AbsenPageAdmin extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/home_admin');
               break;
             case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi');
+              Navigator.pushReplacementNamed(context, '/mutasi_admin');
               break;
             case 2: // QR
             // Handle QR navigation
               break;
             case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info');
+              Navigator.pushReplacementNamed(context, '/info_admin');
               break;
             case 4: // Profile
-              Navigator.pushReplacementNamed(context, '/profile');
+              Navigator.pushReplacementNamed(context, '/profile_admin');
               break;
           }
         },

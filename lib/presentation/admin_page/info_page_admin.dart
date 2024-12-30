@@ -101,7 +101,7 @@ class InfoPageAdmin extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/home_admin');
               break;
             case 1:
-              Navigator.pushReplacementNamed(context, '/mutasi');
+              Navigator.pushReplacementNamed(context, '/mutasi_admin');
               break;
             case 2:
             // Handle QR code
@@ -110,7 +110,7 @@ class InfoPageAdmin extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/info_admin');
               break;
             case 4:
-              Navigator.pushReplacementNamed(context, '/profil');
+              Navigator.pushReplacementNamed(context, '/profil_admin');
               break;
           }
         },

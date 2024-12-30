@@ -180,16 +180,16 @@ class _ChatPageAdminState extends State<ChatPageAdmin> {
         onTap: (index) {
           switch (index) {
             case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+              Navigator.pushReplacementNamed(context, '/home_admin'); // Update the route name
               break;
             case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+              Navigator.pushReplacementNamed(context, '/mutasi_admin'); // Update the route name
               break;
             case 2: // QR
             //TBA
               break;
             case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+              Navigator.pushReplacementNamed(context, '/info_admin'); // Update the route name
               break;
             case 4: // Profile
           }

@@ -33,6 +33,7 @@ abstract class Routes {
   static const LAPORAN = _Paths.LAPORAN;
   static const INFO_ADMIN = _Paths.INFO_ADMIN;
   static const JADWAL_ADMIN = _Paths.JADWAL_ADMIN;
+  static const MUTASI_ADMIN = _Paths.MUTASI_ADMIN;
 }
 
 abstract class _Paths {
@@ -67,4 +68,5 @@ abstract class _Paths {
   static const LAPORAN = '/laporan';
   static const INFO_ADMIN = '/info_admin';
   static const JADWAL_ADMIN = '/jadwal_admin';
+  static const MUTASI_ADMIN = '/mutasi_admin';
 }
