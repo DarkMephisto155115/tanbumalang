@@ -16,7 +16,7 @@ class _HomePageAdminState extends State<HomePageAdmin> {
         case 0: // Home
           break;
         case 1: // Mutasi
-          Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/mutasi_admin'); // Update the route name
           break;
         case 2: // QR
           Navigator.pushReplacementNamed(context, '/qrscan');

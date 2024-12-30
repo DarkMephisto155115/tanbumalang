@@ -3,6 +3,7 @@ import 'package:tanbumalang/presentation/admin_page/admin_home_menu/absen_page_a
 import 'package:tanbumalang/presentation/admin_page/admin_profil_menu/chat_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/home_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/info_page_admin.dart';
+import 'package:tanbumalang/presentation/admin_page/mutasi_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/profil_page_admin.dart';
 import 'package:tanbumalang/presentation/bindings/main_binding.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/absen_page.dart';
@@ -184,6 +185,11 @@ class AppPages {
     GetPage(
       name: _Paths.JADWAL_ADMIN,
       page: () => AdminJadwalPage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.MUTASI_ADMIN,
+      page: () => MutasiPageAdmin(),
       binding: MenuBinding(),
     ),
   ];
