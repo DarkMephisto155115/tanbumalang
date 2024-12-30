@@ -28,6 +28,7 @@ import '../admin_page/admin_home_menu/admin_jadwal_page.dart';
 import '../admin_page/admin_home_menu/location_page.dart';
 import '../admin_page/admin_profil_menu/laporan_page.dart';
 // ignore: unused_import
+import '../admin_page/admin_program_add_edit_page.dart';
 import '../controller/admin/admin_jadwal_controller.dart';
 import '../pages/home_menu/jadwal_page.dart';
 import '../pages/home_menu/keuangan/pembayaran_himpunan.dart';
@@ -192,5 +193,18 @@ class AppPages {
       page: () => MutasiPageAdmin(),
       binding: MenuBinding(),
     ),
+    GetPage(
+      name: _Paths.ADMIN_PROGRAM_LIST,
+      page: () => AdminProgramListPage(),
+      binding:
+      MenuBinding(), // Anda bisa membuat binding khusus jika diperlukan
+    ),
+    GetPage(
+        name: _Paths.ADMIN_PROGRAM_ADD_EDIT,
+        page: () => AdminProgramAddEditPagee(),
+        binding:
+        MenuBinding(), // Anda bisa membuat binding khusus jika diperlukan
+        ),
+
   ];
 }

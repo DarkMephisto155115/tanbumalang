@@ -15,10 +15,21 @@ class LoginPage extends GetView<LoginController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("SIGN IN", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              // App Logo
+              Image.asset(
+                'assets/logo.png', // Path to your logo file in the assets folder
+                height: 100, // Adjust the size of the logo
+              ),
+              const SizedBox(height: 20),
+
+              // Sign-in Text
+              const Text(
+                "SIGN IN",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
               const SizedBox(height: 30),
 
-
+              // Email and Password Input Fields
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
@@ -34,7 +45,7 @@ class LoginPage extends GetView<LoginController> {
                 ),
                 child: Column(
                   children: [
-                    // TextField untuk Email
+                    // Email TextField
                     TextField(
                       controller: controller.emailController,
                       decoration: const InputDecoration(
@@ -44,25 +55,27 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     ),
                     const Divider(height: 20, thickness: 1.0),
-                    // TextField untuk Password
-                    Obx(() => TextField(
-                      controller: controller.passwordController,
-                      obscureText: controller.isPasswordHidden.value,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            controller.isPasswordHidden.value
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color: Colors.black,
+                    // Password TextField
+                    Obx(
+                          () => TextField(
+                        controller: controller.passwordController,
+                        obscureText: controller.isPasswordHidden.value,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              controller.isPasswordHidden.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.black,
+                            ),
+                            onPressed: controller.togglePasswordVisibility,
                           ),
-                          onPressed: controller.togglePasswordVisibility,
                         ),
                       ),
-                    )),
+                    ),
                   ],
                 ),
               ),
@@ -70,43 +83,37 @@ class LoginPage extends GetView<LoginController> {
               const SizedBox(height: 10),
               const Align(
                 alignment: Alignment.centerRight,
-                child: Text('Forgot Password?', style: TextStyle(color: Colors.blue)),
+                child: Text(
+                  'Forgot Password?',
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
               const SizedBox(height: 20),
 
-              // Tombol Login
+              // Login Button
               ElevatedButton(
                 onPressed: () {
                   controller.login();
-                  // Get.offAllNamed('/home');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow, // Warna latar tombol
-                  foregroundColor: Colors.black, // Warna teks tombol
+                  backgroundColor: Colors.yellow, // Button background color
+                  foregroundColor: Colors.black, // Button text color
                 ),
                 child: const Text("Login"),
               ),
-              const SizedBox(height: 20),
-              // Tombol Login
-              ElevatedButton(
-                onPressed: () {
-                  // Logika login
-                  Get.offAllNamed(Routes.HOME_ADMIN);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow,
-                  foregroundColor: Colors.black,
-                ),
-                child: const Text("Login Admin"),
-              ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed(Routes.REGISTRASI);
+              // Register Button
+              TextButton(
+                onPressed: () {
+                  Get.toNamed('/registrasi'); // Navigate to the register page
                 },
-                child: const Text("Don't Have Account? Signup", style: TextStyle(color: Colors.blue)),
+                child: const Text(
+                  "Don't have an account? Register",
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

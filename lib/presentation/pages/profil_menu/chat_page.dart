@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Import Font Awesome
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
+
 
 class ChatPage extends StatefulWidget {
   @override
@@ -19,11 +23,20 @@ class _ChatPageState extends State<ChatPage> {
         messages.add({
           'text': _messageController.text,
           'isUserMessage': true,
-          'time': '2:02pm', // You can implement a real-time clock
+          'time': '2:02pm',
         });
         _messageController.clear();
       });
     }
+  }
+
+  void _launchWhatsApp() async {
+    final link = WhatsAppUnilink(
+      phoneNumber: '+6281556968733', // Ganti dengan nomor yang benar
+      text: 'Hello, I need assistance!',
+    );
+
+    await launch(link.toString());
   }
 
   @override
@@ -34,20 +47,23 @@ class _ChatPageState extends State<ChatPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Go back to the previous screen
+            Navigator.pop(context);
           },
         ),
         title: const Text('Chat Admin'),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 40, height: 40), // Add logo on the right
+          IconButton(
+            icon: FaIcon(
+              FontAwesomeIcons.whatsapp, // Menggunakan WhatsApp Icon dari FontAwesome
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: _launchWhatsApp,
           ),
         ],
       ),
       body: Column(
         children: [
-          // Status Text
           const Padding(
             padding: EdgeInsets.all(8.0),
             child: Text(
@@ -55,7 +71,6 @@ class _ChatPageState extends State<ChatPage> {
               style: TextStyle(color: Colors.grey),
             ),
           ),
-          // Chat Messages
           Expanded(
             child: ListView.builder(
               itemCount: messages.length,
@@ -95,7 +110,6 @@ class _ChatPageState extends State<ChatPage> {
               },
             ),
           ),
-          // Message Input
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Row(
@@ -176,22 +190,23 @@ class _ChatPageState extends State<ChatPage> {
             label: 'Profile',
           ),
         ],
-        currentIndex: 4, // Set to the index of the current page
+        currentIndex: 4,
         onTap: (index) {
           switch (index) {
-            case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
               break;
-            case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi');
               break;
-            case 2: // QR
-            //TBA
+            case 2:
+            // TBA
               break;
-            case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info');
               break;
-            case 4: // Profile
+            case 4:
+              break;
           }
         },
       ),

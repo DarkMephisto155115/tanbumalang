@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
 
-
 class HomePageAdmin extends StatefulWidget {
+  const HomePageAdmin({super.key});
+
   @override
-  _HomePageAdminState createState() => _HomePageAdminState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageAdminState extends State<HomePageAdmin> {
+class _HomePageState extends State<HomePageAdmin> {
   int _selectedIndex = 0; // Track the current index of the bottom navigation bar
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;// Update the selected index
+      _selectedIndex = index; // Update the selected index
       switch (index) {
         case 0: // Home
           break;
         case 1: // Mutasi
-          Navigator.pushReplacementNamed(context, '/mutasi_admin'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/mutasi_admin');
           break;
         case 2: // QR
-          Navigator.pushReplacementNamed(context, '/qrscan');
+          Navigator.pushReplacementNamed(context, '/qrscan_admin');
           break;
         case 3: // Info
-          Navigator.pushReplacementNamed(context, '/info_admin'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/info_admin');
           break;
         case 4: // Profile
-          Navigator.pushReplacementNamed(context, '/profil_admin'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/profil_admin');
           break;
-      }//Yeah i know there is a better way to do this, but i want to sleep. SO FUCK OFF!!!
+      }
     });
   }
 
@@ -36,7 +37,7 @@ class _HomePageAdminState extends State<HomePageAdmin> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: const Text('Home'),
+        title: const Text('ADMIN'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -46,69 +47,42 @@ class _HomePageAdminState extends State<HomePageAdmin> {
       ),
       body: Column(
         children: [
-          Container(
-            color: Colors.grey[300],
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Foto',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(width: 8), // Jarak antara teks dan ikon panah
-                    Icon(Icons.arrow_forward), // Ikon panah
-                  ],
+          // Background Image Section
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 400,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/menu_background.jpg'), // Background image
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ],
-            ),
+              ),
+              Container(
+                width: double.infinity,
+                height: 200,
+                color: Colors.black.withOpacity(0.3), // Overlay for better text visibility
+              ),
+            ],
           ),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 3,
-              padding: const EdgeInsets.all(16),
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Jadwal'
-                    Navigator.pushNamed(context, '/jadwal_admin'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/jadwal.png', 'Jadwal'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Keuangan'
-                    Navigator.pushNamed(context, '/keuangan'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/keuangan.png', 'Keuangan'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Absen'
-                    Navigator.pushNamed(context, '/absen_admin'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/absen.png', 'Lacak'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Program'
-                    Navigator.pushNamed(context, '/program'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/program.png', 'Program'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Struktural'
-                    Navigator.pushNamed(context, '/struktur'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/struktural.png', 'Struktural'),
-                ),
-              ],
+            child: Container(
+              color: Colors.grey[100],
+              child: GridView.count(
+                crossAxisCount: 3,
+                padding: const EdgeInsets.all(16),
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                children: [
+                  buildMenuItem('assets/jadwal.png', 'Jadwal', '/jadwal_admin'),
+                  buildMenuItem('assets/keuangan.png', 'Keuangan', '/keuangan_admin'),
+                  buildMenuItem('assets/absen.png', 'Absen', '/absen_admin'),
+                  buildMenuItem('assets/program.png', 'Program', '/program_admin_crud'),
+                  buildMenuItem('assets/struktural.png', 'Struktural', '/struktur_admin'),
+                ],
+              ),
             ),
           ),
         ],
@@ -164,21 +138,34 @@ class _HomePageAdminState extends State<HomePageAdmin> {
     );
   }
 
-  Widget buildMenuItem(String assetPath, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.green),
+  Widget buildMenuItem(String assetPath, String label, String routeName) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, routeName);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.green),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 6,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Image.asset(assetPath, width: 40, height: 40),
           ),
-          child: Image.asset(assetPath, width: 40, height: 40),
-        ),
-        const SizedBox(height: 8),
-        Text(label, style: const TextStyle(fontSize: 16)),
-      ],
+          const SizedBox(height: 8),
+          Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+        ],
+      ),
     );
   }
 }

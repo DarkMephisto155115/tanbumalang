@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../controller/admin/admin_laporan_controller.dart';
 
-
 class LaporanUserPage extends StatefulWidget {
   @override
   _LaporanUserPageState createState() => _LaporanUserPageState();
@@ -29,8 +28,8 @@ class _LaporanUserPageState extends State<LaporanUserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[300],
-        title: const Text('Laporan User'),
+        backgroundColor: Colors.green[400],
+        title: const Text('Laporan User', style: TextStyle(fontSize: 20)),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -38,7 +37,14 @@ class _LaporanUserPageState extends State<LaporanUserPage> {
           ),
         ],
       ),
-      body: Padding(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.green[100]!, Colors.green[300]!],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,9 +58,11 @@ class _LaporanUserPageState extends State<LaporanUserPage> {
                   final report = _userReports[index];
                   return Column(
                     children: [
-                      _buildLaporanCard(
+                      _buildChatBubble(
                         report['username'] ?? 'Unknown',
                         report['text'] ?? 'No details provided',
+                        report['username'] == 'admin' ? false : true,
+                        report['time'] ?? 'Just now',
                       ),
                       const SizedBox(height: 16),
                     ],
@@ -67,7 +75,7 @@ class _LaporanUserPageState extends State<LaporanUserPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.green[300],
+        backgroundColor: Colors.green[400],
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.white70,
         items: [
@@ -134,28 +142,77 @@ class _LaporanUserPageState extends State<LaporanUserPage> {
     );
   }
 
-  Widget _buildLaporanCard(String username, String laporan) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.black),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+  // Method to build chat bubble UI with animation
+  Widget _buildChatBubble(String username, String laporan, bool isUserMessage, String time) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      transform: Matrix4.translationValues(0.0, 10.0, 0.0),
+      child: Row(
+        mainAxisAlignment:
+        isUserMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
-          Text(
-            username,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+          if (!isUserMessage)
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/avatar_admin.png'),
+              radius: 20,
+            ),
+          SizedBox(width: 8),
+          Flexible(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                gradient: isUserMessage
+                    ? LinearGradient(
+                  colors: [Colors.green[100]!, Colors.green[200]!],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+                    : LinearGradient(
+                  colors: [Colors.grey[300]!, Colors.grey[500]!],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(0, 4),
+                    blurRadius: 10,
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    username,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: isUserMessage ? Colors.green[800] : Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    laporan,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    time,
+                    style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+                  ),
+                ],
+              ),
+            ),
           ),
-          const SizedBox(height: 8),
-          const Text(
-            'Laporan :',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          Text(laporan),
+          SizedBox(width: 8),
+          if (isUserMessage)
+            CircleAvatar(
+              backgroundImage: AssetImage('assets/avatar_user.png'),
+              radius: 20,
+            ),
         ],
       ),
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -11,23 +12,23 @@ class _HomePageState extends State<HomePage> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;// Update the selected index
+      _selectedIndex = index; // Update the selected index
       switch (index) {
         case 0: // Home
           break;
         case 1: // Mutasi
-          Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/mutasi');
           break;
         case 2: // QR
           Navigator.pushReplacementNamed(context, '/qrscan');
           break;
         case 3: // Info
-          Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/info');
           break;
         case 4: // Profile
-          Navigator.pushReplacementNamed(context, '/profil'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/profil');
           break;
-      }//Yeah i know there is a better way to do this, but i want to sleep. SO FUCK OFF!!!
+      }
     });
   }
 
@@ -46,69 +47,42 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Container(
-            color: Colors.grey[300],
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Foto',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(width: 8), // Jarak antara teks dan ikon panah
-                    Icon(Icons.arrow_forward), // Ikon panah
-                  ],
+          // Background Image Section
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 400,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/menu_background.jpg'), // Background image
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ],
-            ),
+              ),
+              Container(
+                width: double.infinity,
+                height: 200,
+                color: Colors.black.withOpacity(0.3), // Overlay for better text visibility
+                ),
+            ],
           ),
           Expanded(
-            child: GridView.count(
-              crossAxisCount: 3,
-              padding: const EdgeInsets.all(16),
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Jadwal'
-                    Navigator.pushNamed(context, '/jadwal'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/jadwal.png', 'Jadwal'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Keuangan'
-                    Navigator.pushNamed(context, '/keuangan'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/keuangan.png', 'Keuangan'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Absen'
-                    Navigator.pushNamed(context, '/absen'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/absen.png', 'Absen'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Program'
-                    Navigator.pushNamed(context, '/program'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/program.png', 'Program'),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    // Action for 'Struktural'
-                    Navigator.pushNamed(context, '/struktur'); // Example of navigation
-                  },
-                  child: buildMenuItem('assets/struktural.png', 'Struktural'),
-                ),
-              ],
+            child: Container(
+              color: Colors.grey[100],
+              child: GridView.count(
+                crossAxisCount: 3,
+                padding: const EdgeInsets.all(16),
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                children: [
+                  buildMenuItem('assets/jadwal.png', 'Jadwal', '/jadwal'),
+                  buildMenuItem('assets/keuangan.png', 'Keuangan', '/keuangan'),
+                  buildMenuItem('assets/absen.png', 'Absen', '/absen'),
+                  buildMenuItem('assets/program.png', 'Program', '/program'),
+                  buildMenuItem('assets/struktural.png', 'Struktural', '/struktur'),
+                ],
+              ),
             ),
           ),
         ],
@@ -164,21 +138,34 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildMenuItem(String assetPath, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.green),
+  Widget buildMenuItem(String assetPath, String label, String routeName) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, routeName);
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.green),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 6,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Image.asset(assetPath, width: 40, height: 40),
           ),
-          child: Image.asset(assetPath, width: 40, height: 40),
-        ),
-        const SizedBox(height: 8),
-        Text(label, style: const TextStyle(fontSize: 16)),
-      ],
+          const SizedBox(height: 8),
+          Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+        ],
+      ),
     );
   }
 }

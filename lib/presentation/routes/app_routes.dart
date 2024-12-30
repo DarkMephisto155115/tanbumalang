@@ -34,6 +34,8 @@ abstract class Routes {
   static const INFO_ADMIN = _Paths.INFO_ADMIN;
   static const JADWAL_ADMIN = _Paths.JADWAL_ADMIN;
   static const MUTASI_ADMIN = _Paths.MUTASI_ADMIN;
+  static const ADMIN_PROGRAM_ADD_EDIT = _Paths.ADMIN_PROGRAM_ADD_EDIT;
+  static const ADMIN_PROGRAM_LIST = _Paths.ADMIN_PROGRAM_LIST;
 }
 
 abstract class _Paths {
@@ -69,4 +71,6 @@ abstract class _Paths {
   static const INFO_ADMIN = '/info_admin';
   static const JADWAL_ADMIN = '/jadwal_admin';
   static const MUTASI_ADMIN = '/mutasi_admin';
+  static const ADMIN_PROGRAM_ADD_EDIT = '/program_admin_crud';
+  static const ADMIN_PROGRAM_LIST = '/program_admin_list';
 }
