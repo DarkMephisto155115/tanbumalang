@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../routes/app_pages.dart';
-// import 'register_view.dart';
+import '../controller/login_controller.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[300], // Latar belakang hijau muda
+      backgroundColor: Colors.green[300],
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -18,12 +18,12 @@ class LoginPage extends StatelessWidget {
               const Text("SIGN IN", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
               const SizedBox(height: 30),
 
-              // Kotak email dan password dengan sudut melengkung
+
               Container(
                 padding: const EdgeInsets.all(16.0),
                 decoration: BoxDecoration(
-                  color: Colors.white, // Latar belakang putih untuk kotak
-                  borderRadius: BorderRadius.circular(15), // Sudut melengkung
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     const BoxShadow(
                       color: Colors.black12,
@@ -32,26 +32,37 @@ class LoginPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     // TextField untuk Email
                     TextField(
-                      decoration: InputDecoration(
+                      controller: controller.emailController,
+                      decoration: const InputDecoration(
                         labelText: 'Email',
-                        border: InputBorder.none, // Menghapus border default
+                        border: InputBorder.none,
                         contentPadding: EdgeInsets.symmetric(horizontal: 10),
                       ),
                     ),
-                    Divider(height: 20, thickness: 1.0), // Garis pemisah antara email dan password
+                    const Divider(height: 20, thickness: 1.0),
                     // TextField untuk Password
-                    TextField(
-                      obscureText: true,
+                    Obx(() => TextField(
+                      controller: controller.passwordController,
+                      obscureText: controller.isPasswordHidden.value,
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        border: InputBorder.none, // Menghapus border default
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            controller.isPasswordHidden.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.black,
+                          ),
+                          onPressed: controller.togglePasswordVisibility,
+                        ),
                       ),
-                    ),
+                    )),
                   ],
                 ),
               ),
@@ -66,9 +77,8 @@ class LoginPage extends StatelessWidget {
               // Tombol Login
               ElevatedButton(
                 onPressed: () {
-                  // Logika login
-                  // Get.toNamed(Routes.HOME);
-                  Get.offAllNamed(Routes.HOME);
+                  controller.login();
+                  // Get.offAllNamed('/home');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.yellow, // Warna latar tombol
@@ -84,17 +94,15 @@ class LoginPage extends StatelessWidget {
                   Get.offAllNamed(Routes.HOME_ADMIN);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow, // Warna latar tombol
-                  foregroundColor: Colors.black, // Warna teks tombol
+                  backgroundColor: Colors.yellow,
+                  foregroundColor: Colors.black,
                 ),
                 child: const Text("Login Admin"),
               ),
               const SizedBox(height: 20),
 
-              // Teks untuk navigasi ke halaman register
               GestureDetector(
                 onTap: () {
-                  // Get.to(() => RegisterView());
                   Get.toNamed(Routes.REGISTRASI);
                 },
                 child: const Text("Don't Have Account? Signup", style: TextStyle(color: Colors.blue)),

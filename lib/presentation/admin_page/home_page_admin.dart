@@ -22,7 +22,7 @@ class _HomePageAdminState extends State<HomePageAdmin> {
           Navigator.pushReplacementNamed(context, '/qrscan');
           break;
         case 3: // Info
-          Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+          Navigator.pushReplacementNamed(context, '/info_admin'); // Update the route name
           break;
         case 4: // Profile
           Navigator.pushReplacementNamed(context, '/profil_admin'); // Update the route name
@@ -76,7 +76,7 @@ class _HomePageAdminState extends State<HomePageAdmin> {
                 GestureDetector(
                   onTap: () {
                     // Action for 'Jadwal'
-                    Navigator.pushNamed(context, '/jadwal'); // Example of navigation
+                    Navigator.pushNamed(context, '/jadwal_admin'); // Example of navigation
                   },
                   child: buildMenuItem('assets/jadwal.png', 'Jadwal'),
                 ),

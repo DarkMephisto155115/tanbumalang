@@ -1,58 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
-class AboutUsPage extends StatelessWidget {
+class KalenderPage extends StatelessWidget {
+  final CollectionReference jadwalCollection = FirebaseFirestore.instance.collection('jadwal');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Jadwal'),
         backgroundColor: Colors.green[300],
-        title: const Text('Tentang Kami'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // Back button action
-          },
+          onPressed: () => Get.back(),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo asset
-          ),
-        ],
       ),
-      body: SingleChildScrollView( // Wrap content in SingleChildScrollView
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: double.infinity,
-              height: 150,
-              color: Colors.grey[300],
-              child: Center(
-                child: Image.asset(
-                  'assets/logo.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              'Himpunan Mahasiswa Kabupaten Tanah Bumbu ialah wadah aktualisasi bagi kawan-kawan mahasiswa yang sedang menuntut ilmu pengetahuan di perguruan tinggi. Organisasi non-politik yang berfungsi menyambung tali persaudaraan antara mahasiswa agar terciptanya ukhuwah dan kerukunan, demi tercapainya SDM yang berkualitas.',
-              style: TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              width: double.infinity,
-              height: 400,
-              color: Colors.grey[300],
-              child: Image.asset(
-                'assets/map_image.png', // Static map image asset (replace with your map asset)
-                fit: BoxFit.cover,
-              ),
-            ),
-          ],
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: jadwalCollection.snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return const Center(child: Text('Error loading data.'));
+          }
+          final documents = snapshot.data?.docs ?? [];
+          return ListView.builder(
+            itemCount: documents.length,
+            itemBuilder: (context, index) {
+              final dayData = documents[index].data() as Map<String, dynamic>;
+              final title = dayData['title'] ?? 'No Title';
+              final date = dayData['date'] ?? 'No Date';
+              return ListTile(
+                title: Text(title),
+                subtitle: Text(date),
+                leading: const Icon(Icons.event),
+              );
+            },
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -99,22 +86,23 @@ class AboutUsPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        currentIndex: 4, // Set to the index of the current page
+        currentIndex: 0,
         onTap: (index) {
           switch (index) {
             case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
               break;
             case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+              Navigator.pushReplacementNamed(context, '/mutasi');
               break;
             case 2: // QR
             //TBA
               break;
             case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+              Navigator.pushReplacementNamed(context, '/info');
               break;
             case 4: // Profile
+              Navigator.pushReplacementNamed(context, '/profil');
+              break;
           }
         },
       ),

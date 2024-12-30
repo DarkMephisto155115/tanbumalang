@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../routes/app_pages.dart';
-// import 'login_view.dart';
+
 
 class VerificationPage extends StatelessWidget {
   @override
@@ -24,14 +24,14 @@ class VerificationPage extends StatelessWidget {
                   _buildVerificationBox(),
                   _buildVerificationBox(),
                   _buildVerificationBox(),
-                  _buildVerificationBox(), // Total 5 kotak verifikasi
+                  _buildVerificationBox(),
                 ],
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   // Setelah verifikasi selesai, kembalikan ke halaman login
-                  // Get.offAll(() => LoginView()); // Menghapus stack halaman sebelumnya dan kembali ke login
+
                   Get.offAllNamed(Routes.LOGIN);
                 },
                 style: ElevatedButton.styleFrom(

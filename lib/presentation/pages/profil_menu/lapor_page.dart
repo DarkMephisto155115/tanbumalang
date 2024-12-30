@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tanbumalang/presentation/controller/lapor_controller.dart';
 
-class LaporPage extends StatelessWidget {
+class LaporPage extends GetView<LaporController> {
+  final LaporController _laporController = LaporController();
+  final TextEditingController _laporanController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +31,20 @@ class LaporPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const TextField(
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                hintText: 'Username',
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _laporanController,
               maxLines: 5,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Tulis laporan!!!',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black, width: 2),
@@ -37,10 +54,25 @@ class LaporPage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.black, backgroundColor: Colors.yellow[300], // Text color
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.yellow[300],
               ),
-              onPressed: () {
-                // Add logic for submitting the report
+              onPressed: () async {
+                if (_laporanController.text.isNotEmpty && _usernameController.text.isNotEmpty) {
+                  await _laporController.sendLaporan(
+                    _laporanController.text,
+                    _usernameController.text,
+                  );
+                  _laporanController.clear();
+                  _usernameController.clear();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Laporan berhasil dikirim!')),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Username dan laporan tidak boleh kosong')),
+                  );
+                }
               },
               child: const Text('Kirim Laporan'),
             ),
@@ -92,22 +124,21 @@ class LaporPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        currentIndex: 4, // Set to the index of the current page
+        currentIndex: 4,
         onTap: (index) {
           switch (index) {
-            case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
               break;
-            case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi');
               break;
-            case 2: // QR
-            //TBA
+            case 2:
               break;
-            case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info');
               break;
-            case 4: // Profile
+            case 4:
           }
         },
       ),

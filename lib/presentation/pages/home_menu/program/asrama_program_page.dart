@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AsramaProgramPage extends StatefulWidget {
   @override
@@ -27,7 +28,7 @@ class _AsramaPageState extends State<AsramaProgramPage> {
         Navigator.pushReplacementNamed(context, '/info');
         break;
       case 4: // Profile
-        Navigator.pushReplacementNamed(context, '/profile');
+        Navigator.pushReplacementNamed(context, '/profil');
         break;
     }
   }
@@ -45,20 +46,34 @@ class _AsramaPageState extends State<AsramaProgramPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Program items
-              _buildProgramItem('Rapat Bulanan'),
-              _buildProgramItem('Sholat Berjamaah'),
-              _buildProgramItem('Gotong Royong'),
-              _buildProgramItem('Sehat Bersama'),
-            ],
-          ),
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('programAsrama').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return const Center(child: Text('Error loading data.'));
+          }
+
+          final programs = snapshot.data?.docs ?? [];
+
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: programs.map((program) {
+                  final data = program.data() as Map<String, dynamic>;
+                  final title = data['title'] ?? 'No Title';
+                  final imageUrl = data['imageUrl'] ?? '';
+
+                  return _buildProgramItem(title, imageUrl);
+                }).toList(),
+              ),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -105,14 +120,14 @@ class _AsramaPageState extends State<AsramaProgramPage> {
             label: 'Profile',
           ),
         ],
-        currentIndex: _selectedIndex, // Ensure the index is updated
+        currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
     );
   }
 
-  // Function to build each program item as per the screenshot
-  Widget _buildProgramItem(String title) {
+  // Function to build each program item with image from Firestore
+  Widget _buildProgramItem(String title, String imageUrl) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       padding: const EdgeInsets.all(16.0),
@@ -128,11 +143,19 @@ class _AsramaPageState extends State<AsramaProgramPage> {
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          Container(
+          imageUrl.isNotEmpty
+              ? Image.network(
+            imageUrl,
             height: 150,
-            color: Colors.grey[300], // Placeholder for the image
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) =>
+            const Center(child: Text('Failed to load image')),
+          )
+              : Container(
+            height: 150,
+            color: Colors.grey[300],
             child: Center(
-              child: Text('Foto', style: TextStyle(color: Colors.grey[600])),
+              child: Text('No Image', style: TextStyle(color: Colors.grey[600])),
             ),
           ),
         ],

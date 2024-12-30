@@ -1,10 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../controller/registration_controller.dart';
 
-import '../routes/app_pages.dart';
-// import 'verification_view.dart';
-
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends GetView<RegistrationController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +20,14 @@ class RegistrationPage extends StatelessWidget {
               // Email Field
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white, // Latar belakang putih
-                  borderRadius: BorderRadius.circular(5), // Sudut melengkung
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: controller.emailController,
+                  decoration: const InputDecoration(
                     labelText: 'Email',
-                    border: UnderlineInputBorder(), // Garis bawah
+                    border: UnderlineInputBorder(),
                   ),
                 ),
               ),
@@ -36,13 +36,14 @@ class RegistrationPage extends StatelessWidget {
               // Username Field
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white, // Latar belakang putih
-                  borderRadius: BorderRadius.circular(5), // Sudut melengkung
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: controller.usernameController,
+                  decoration: const InputDecoration(
                     labelText: 'Username',
-                    border: UnderlineInputBorder(), // Garis bawah
+                    border: UnderlineInputBorder(),
                   ),
                 ),
               ),
@@ -51,13 +52,14 @@ class RegistrationPage extends StatelessWidget {
               // Password Field
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white, // Latar belakang putih
-                  borderRadius: BorderRadius.circular(5), // Sudut melengkung
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: controller.passwordController,
+                  decoration: const InputDecoration(
                     labelText: 'Password',
-                    border: UnderlineInputBorder(), // Garis bawah
+                    border: UnderlineInputBorder(),
                   ),
                   obscureText: true,
                 ),
@@ -67,13 +69,14 @@ class RegistrationPage extends StatelessWidget {
               // Prodi Field
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white, // Latar belakang putih
-                  borderRadius: BorderRadius.circular(5), // Sudut melengkung
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: controller.prodiController,
+                  decoration: const InputDecoration(
                     labelText: 'Prodi',
-                    border: UnderlineInputBorder(), // Garis bawah
+                    border: UnderlineInputBorder(),
                   ),
                 ),
               ),
@@ -82,13 +85,14 @@ class RegistrationPage extends StatelessWidget {
               // Angkatan Field
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white, // Latar belakang putih
-                  borderRadius: BorderRadius.circular(5), // Sudut melengkung
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: controller.angkatanController,
+                  decoration: const InputDecoration(
                     labelText: 'Angkatan',
-                    border: UnderlineInputBorder(), // Garis bawah
+                    border: UnderlineInputBorder(),
                   ),
                 ),
               ),
@@ -96,14 +100,12 @@ class RegistrationPage extends StatelessWidget {
 
               // Register Button
               ElevatedButton(
-                onPressed: () {
-                  // Add register logic here
-                  // Get.to(() => VerificationView());
-                  Get.toNamed(Routes.VERIFIKASI);
+                onPressed: () async {
+                  await controller.registerUser();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow, // menggantikan 'primary'
-                  foregroundColor: Colors.black, // menggantikan 'onPrimary'
+                  backgroundColor: Colors.yellow,
+                  foregroundColor: Colors.black,
                 ),
                 child: const Text("Register"),
               ),

@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
+import '../../controller/admin/admin_laporan_controller.dart';
 
 
-class LaporanUserPage extends StatelessWidget {
+class LaporanUserPage extends StatefulWidget {
+  @override
+  _LaporanUserPageState createState() => _LaporanUserPageState();
+}
+
+class _LaporanUserPageState extends State<LaporanUserPage> {
+  final LaporanController _laporanController = LaporanController();
+  List<Map<String, dynamic>> _userReports = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAllReports();
+  }
+
+  // Load all reports from Firestore
+  Future<void> _loadAllReports() async {
+    final reports = await _laporanController.fetchAllReports();
+    setState(() {
+      _userReports = reports;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +34,7 @@ class LaporanUserPage extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo image
+            child: Image.asset('assets/logo.png', width: 50, height: 50),
           ),
         ],
       ),
@@ -20,9 +43,25 @@ class LaporanUserPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _buildLaporanCard('user9101', 'Tidak dapat melakukan absensi'),
-            const SizedBox(height: 16), // Spacing between cards
-            _buildLaporanCard('user8621', 'Qrcode jika diklik terjadi error'),
+            Expanded(
+              child: _userReports.isEmpty
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                itemCount: _userReports.length,
+                itemBuilder: (context, index) {
+                  final report = _userReports[index];
+                  return Column(
+                    children: [
+                      _buildLaporanCard(
+                        report['username'] ?? 'Unknown',
+                        report['text'] ?? 'No details provided',
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -71,22 +110,24 @@ class LaporanUserPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        currentIndex: 4, // Set to the index of the current page
+        currentIndex: 4,
         onTap: (index) {
           switch (index) {
-            case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
               break;
-            case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi');
               break;
-            case 2: // QR
-            //TBA
+            case 2:
+            // QR Code action
               break;
-            case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info');
               break;
-            case 4: // Profile
+            case 4:
+            // Profile action
+              break;
           }
         },
       ),

@@ -16,6 +16,7 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const ABOUTUS = _Paths.ABOUTUS;
   static const ABSEN = _Paths.ABSEN;
+  static const JADWAL = _Paths.JADWAL;
   static const KEUANGAN = _Paths.KEUANGAN;
   static const PEMBAYARAN_ASRAMA = _Paths.PEMBAYARAN_ASRAMA;
   static const PEMBAYARAN_HIMPUNAN = _Paths.PEMBAYARAN_HIMPUNAN;
@@ -30,6 +31,8 @@ abstract class Routes {
   static const PROFIL_ADMIN = _Paths.PROFIL_ADMIN;
   static const CHAT_ADMIN = _Paths.CHAT_ADMIN;
   static const LAPORAN = _Paths.LAPORAN;
+  static const INFO_ADMIN = _Paths.INFO_ADMIN;
+  static const JADWAL_ADMIN = _Paths.JADWAL_ADMIN;
 }
 
 abstract class _Paths {
@@ -47,6 +50,7 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const ABOUTUS = '/aboutus';
   static const ABSEN = '/absen';
+  static const JADWAL = '/jadwal';
   static const KEUANGAN = '/keuangan';
   static const PEMBAYARAN_ASRAMA = '/pembayaran_asrama';
   static const PEMBAYARAN_HIMPUNAN = '/pembayaran_himpunan';
@@ -61,4 +65,6 @@ abstract class _Paths {
   static const PROFIL_ADMIN = '/profil_admin';
   static const CHAT_ADMIN = '/chat_admin';
   static const LAPORAN = '/laporan';
+  static const INFO_ADMIN = '/info_admin';
+  static const JADWAL_ADMIN = '/jadwal_admin';
 }

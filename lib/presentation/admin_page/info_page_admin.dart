@@ -1,55 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controller/admin/admin_info_controller.dart';
 
-class AboutUsPage extends StatelessWidget {
+class InfoPageAdmin extends StatelessWidget {
+  final InfoController infoController = Get.put(InfoController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[300],
-        title: const Text('Tentang Kami'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context); // Back button action
-          },
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo asset
-          ),
-        ],
+        title: const Text('Add Info'),
       ),
-      body: SingleChildScrollView( // Wrap content in SingleChildScrollView
+      body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              height: 150,
-              color: Colors.grey[300],
-              child: Center(
-                child: Image.asset(
-                  'assets/logo.png',
-                  fit: BoxFit.cover,
+            TextField(
+              onChanged: (value) => infoController.titleController.value = value,
+              decoration: InputDecoration(labelText: 'Title'),
+            ),
+            TextField(
+              onChanged: (value) => infoController.descriptionController.value = value,
+              decoration: InputDecoration(labelText: 'Description'),
+              maxLines: 3,
+            ),
+            const SizedBox(height: 16),
+            Obx(() => infoController.imageFile.value == null
+                ? GestureDetector(
+              onTap: infoController.pickImage,
+              child: Container(
+                height: 100,
+                width: double.infinity,
+                color: Colors.grey[300],
+                child: const Center(
+                  child: Text('Select an Image'),
                 ),
               ),
-            ),
+            )
+                : Image.file(infoController.imageFile.value!, height: 100, fit: BoxFit.cover)),
             const SizedBox(height: 16),
-            const Text(
-              'Himpunan Mahasiswa Kabupaten Tanah Bumbu ialah wadah aktualisasi bagi kawan-kawan mahasiswa yang sedang menuntut ilmu pengetahuan di perguruan tinggi. Organisasi non-politik yang berfungsi menyambung tali persaudaraan antara mahasiswa agar terciptanya ukhuwah dan kerukunan, demi tercapainya SDM yang berkualitas.',
-              style: TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 16),
-            Container(
-              width: double.infinity,
-              height: 400,
-              color: Colors.grey[300],
-              child: Image.asset(
-                'assets/map_image.png', // Static map image asset (replace with your map asset)
-                fit: BoxFit.cover,
-              ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green[300]),
+              onPressed: infoController.addInfo,
+              child: const Text('Add Info'),
             ),
           ],
         ),
@@ -99,22 +94,24 @@ class AboutUsPage extends StatelessWidget {
             label: 'Profile',
           ),
         ],
-        currentIndex: 4, // Set to the index of the current page
+        currentIndex: 3,
         onTap: (index) {
           switch (index) {
-            case 0: // Home
-              Navigator.pushReplacementNamed(context, '/home'); // Update the route name
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home_admin');
               break;
-            case 1: // Mutasi
-              Navigator.pushReplacementNamed(context, '/mutasi'); // Update the route name
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi');
               break;
-            case 2: // QR
-            //TBA
+            case 2:
+            // Handle QR code
               break;
-            case 3: // Info
-              Navigator.pushReplacementNamed(context, '/info'); // Update the route name
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info_admin');
               break;
-            case 4: // Profile
+            case 4:
+              Navigator.pushReplacementNamed(context, '/profil');
+              break;
           }
         },
       ),

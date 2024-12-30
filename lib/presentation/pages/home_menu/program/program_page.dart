@@ -27,7 +27,7 @@ class _ProgramPageState extends State<ProgramPage> {
         Navigator.pushReplacementNamed(context, '/info');
         break;
       case 4: // Profile
-        Navigator.pushReplacementNamed(context, '/profile');
+        Navigator.pushReplacementNamed(context, '/profil');
         break;
     }
   }
