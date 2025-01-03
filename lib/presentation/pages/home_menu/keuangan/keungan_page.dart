@@ -1,47 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class KeuanganPage extends StatefulWidget {
+  const KeuanganPage({super.key});
+
   @override
   _KeuanganPageState createState() => _KeuanganPageState();
 }
 
 class _KeuanganPageState extends State<KeuanganPage> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    // Navigation logic
-    switch (index) {
-      case 0: // Home
-        Navigator.pushReplacementNamed(context, '/home');
-        break;
-      case 1: // Mutasi
-        Navigator.pushReplacementNamed(context, '/mutasi');
-        break;
-      case 2: // QR (not implemented)
-        break;
-      case 3: // Info
-        Navigator.pushReplacementNamed(context, '/info');
-        break;
-      case 4: // Profile
-        Navigator.pushReplacementNamed(context, '/profile');
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[300],
-        title: const Text('Keuangan'),
+        backgroundColor: Colors.green,
+        iconTheme: const IconThemeData(
+          color: Colors.white, //change your color here
+        ),
+        title: const Text('Keuangan', style: TextStyle(color: Colors.white)),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo image
+            child: Image.asset('assets/logo.png', width: 50, height: 50),
           ),
         ],
       ),
@@ -120,45 +101,51 @@ class _KeuanganPageState extends State<KeuanganPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.green[300],
-        selectedItemColor: Colors.black,
+        backgroundColor: Colors.green,
+        selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_home.png', width: 24, height: 24),
-            label: 'Home',
+            icon: Icon(Icons.home),
+            label: 'Menu',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_mutasi.png', width: 24, height: 24),
+            icon: Icon(Icons.swap_horiz),
             label: 'Mutasi',
           ),
           BottomNavigationBarItem(
-            icon: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                border: Border.all(color: Colors.black, width: 2),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Image.asset('assets/icon_qr_code.png', fit: BoxFit.cover),
-              ),
-            ),
-            label: '',
+            icon: Icon(Icons.qr_code),
+            label: 'QR',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_info.png', width: 24, height: 24),
+            icon: Icon(Icons.info),
             label: 'Info',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_profile.png', width: 24, height: 24),
+            icon: Icon(Icons.account_circle),
             label: 'Profile',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: 0,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi');
+              break;
+            case 2:
+              Get.toNamed('/qrscan');
+              break;
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info');
+              break;
+            case 4:
+              Navigator.pushReplacementNamed(context, '/profil');
+              break;
+          }
+        },
       ),
     );
   }

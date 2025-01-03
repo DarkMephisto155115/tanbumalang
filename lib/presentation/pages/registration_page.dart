@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/registration_controller.dart';
 
 class RegistrationPage extends GetView<RegistrationController> {
+  const RegistrationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

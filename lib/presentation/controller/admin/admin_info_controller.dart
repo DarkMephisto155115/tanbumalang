@@ -11,6 +11,7 @@ class InfoController extends GetxController {
 
   final titleController = ''.obs;
   final descriptionController = ''.obs;
+  final urlController = ''.obs;
   final Rx<File?> imageFile = Rx<File?>(null);
 
   final ImagePicker picker = ImagePicker();
@@ -30,15 +31,14 @@ class InfoController extends GetxController {
       await ref.putFile(image);
       return await ref.getDownloadURL();
     } catch (e) {
-      print('Error uploading image: $e');
       return '';
     }
   }
 
   // Function to add info data to Firestore
   Future<void> addInfo() async {
-    if (titleController.value.isEmpty || descriptionController.value.isEmpty) {
-      Get.snackbar('Error', 'Title and Description are required', snackPosition: SnackPosition.TOP,
+    if (titleController.value.isEmpty || descriptionController.value.isEmpty || urlController.value.isEmpty) {
+      Get.snackbar('Error', 'Title, Description, and URL are required', snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.green[200],
         colorText: Colors.black,);
       return;
@@ -53,11 +53,13 @@ class InfoController extends GetxController {
       'title': titleController.value,
       'description': descriptionController.value,
       'imageUrl': imageUrl,
+      'url': urlController.value,
     });
 
     // Clear fields after uploading
     titleController.value = '';
     descriptionController.value = '';
+    urlController.value = '';
     imageFile.value = null;
 
     Get.snackbar('Success', 'Info added successfully', snackPosition: SnackPosition.TOP,

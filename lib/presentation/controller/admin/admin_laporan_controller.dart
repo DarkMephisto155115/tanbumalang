@@ -12,7 +12,6 @@ class LaporanController {
           .map((doc) => doc.data() as Map<String, dynamic>)
           .toList();
     } catch (e) {
-      print("Error fetching reports: $e");
       return [];
     }
   }

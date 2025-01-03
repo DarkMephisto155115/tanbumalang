@@ -2,22 +2,29 @@
 class Assets {
   Assets._();
 
+  static const String assets4p9LkJyTwPJHE5RTOVhQG8yBt0Ep4tDlwrtWduJbzV8mfT5Q4AdYG0YyCLEhBJFQ4imV5bv5968v1L4IFzQ4rLlDHRpzyM4MQLNMEXWDlCFnGhgXIe18MxAXCUPJPlwu4mc342rzyY3w = 'assets/4p9LkJyTwP-jHE5RTOVhQG8yBt0Ep4t-DlwrtWduJbzV-8mfT5Q4Ad_yG0-YyCLEhB_jFQ4imV5bv5968v1_l4-IFzQ4rLlDHRpzyM4MQLNMEXWDlCFnGhg-XIe18MxAXCUPJPlwu4mc342rzy-Y3w.png';
   static const String assetsAbsen = 'assets/absen.png';
   static const String assetsAsramaIcon = 'assets/asrama_icon.png';
-  static const String assetsDefaultAvatarIconOfSocialMediaUserVector = 'assets/default_profile.jpg';
+  static const String assetsDefaultProfile = 'assets/default_profile.jpg';
   static const String assetsHimpunanIcon = 'assets/himpunan_icon.png';
   static const String assetsIconHome = 'assets/icon_home.png';
   static const String assetsIconInfo = 'assets/icon_info.png';
+  static const String assetsIconInfoOld = 'assets/icon_info_old.png';
   static const String assetsIconMutasi = 'assets/icon_mutasi.png';
+  static const String assetsIconMutasiOld = 'assets/icon_mutasi_old.png';
   static const String assetsIconProfile = 'assets/icon_profile.png';
   static const String assetsIconQrCode = 'assets/icon_qr_code.png';
   static const String assetsJadwal = 'assets/jadwal.png';
   static const String assetsKeuangan = 'assets/keuangan.png';
+  static const String assetsKeuanganOld = 'assets/keuangan_old.png';
   static const String assetsLogo = 'assets/logo.png';
+  static const String assetsLogoOld = 'assets/logo_old.png';
   static const String assetsMapImage = 'assets/map_image.png';
   static const String assetsMenuBackground = 'assets/menu_background.jpg';
+  static const String assetsMenuBackgroundOld = 'assets/menu_background_old.jpg';
   static const String assetsPanah = 'assets/panah.png';
   static const String assetsProgram = 'assets/program.png';
   static const String assetsStruktural = 'assets/struktural.png';
+  static const String assetsStrukturalOld = 'assets/struktural_old.png';
 
 }

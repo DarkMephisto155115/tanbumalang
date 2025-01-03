@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,65 +11,96 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0; // Track the current index of the bottom navigation bar
+  Map<String, dynamic>? userData;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index; // Update the selected index
-      switch (index) {
-        case 0: // Home
-          break;
-        case 1: // Mutasi
-          Navigator.pushReplacementNamed(context, '/mutasi');
-          break;
-        case 2: // QR
-          Navigator.pushReplacementNamed(context, '/qrscan');
-          break;
-        case 3: // Info
-          Navigator.pushReplacementNamed(context, '/info');
-          break;
-        case 4: // Profile
-          Navigator.pushReplacementNamed(context, '/profil');
-          break;
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData(); // Fetch user data when the widget is initialized
+  }
+
+  Future<void> fetchUserData() async {
+    try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        DocumentSnapshot<Map<String, dynamic>> userDoc = await FirebaseFirestore.instance
+            .collection('users')
+            .doc(currentUser.uid)
+            .get();
+
+        setState(() {
+          userData = userDoc.data();
+        });
       }
-    });
+    } catch (e) {
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[300],
-        title: const Text('Home'),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.green,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/logo.png', width: 50, height: 50), // Logo custom
+            child: Image.asset('assets/logo.png', width: 50, height: 50),
           ),
         ],
       ),
       body: Column(
         children: [
-          // Background Image Section
-          Stack(
-            children: [
-              Container(
-                width: double.infinity,
-                height: 400,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/menu_background.jpg'), // Background image
-                    fit: BoxFit.cover,
-                  ),
+          // Profile Section
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.grey[100],
+              // border: Border.all(color: Colors.green.shade300,width: 2),
+              // border: Border(bottom:  BorderSide(color: Colors.green.shade300, width: 2))
+              // borderRadius: const BorderRadius.only(
+              //   bottomLeft: Radius.circular(20),
+              //   bottomRight: Radius.circular(20),
+              // ),
+            ),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: userData != null && userData!['profileImageUrl'] != null
+                      ? NetworkImage(userData!['profileImageUrl'])
+                      : const AssetImage('assets/profile_placeholder.png') as ImageProvider,
+                  backgroundColor: Colors.grey[300],
                 ),
-              ),
-              Container(
-                width: double.infinity,
-                height: 200,
-                color: Colors.black.withOpacity(0.3), // Overlay for better text visibility
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      userData != null ? 'Welcome, ${userData!['username']}' : 'Welcome',
+                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      userData != null ? 'Angkatan: ${userData!['angkatan']}' : '',
+                      style: const TextStyle(fontSize: 16, color: Colors.black54),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      userData != null ? 'Prodi: ${userData!['prodi']}' : '',
+                      style: const TextStyle(fontSize: 16, color: Colors.black54),
+                    ),
+                    // const SizedBox(height: 4),
+                    // const Text(
+                    //   'Have a great day!',
+                    //   style: TextStyle(fontSize: 16, color: Colors.black54),
+                    // ),
+                  ],
                 ),
-            ],
+              ],
+            ),
           ),
+          // const SizedBox(height: 16),
           Expanded(
             child: Container(
               color: Colors.grey[100],
@@ -76,11 +110,10 @@ class _HomePageState extends State<HomePage> {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 children: [
-                  buildMenuItem('assets/jadwal.png', 'Jadwal', '/jadwal'),
-                  buildMenuItem('assets/keuangan.png', 'Keuangan', '/keuangan'),
-                  buildMenuItem('assets/absen.png', 'Absen', '/absen'),
-                  buildMenuItem('assets/program.png', 'Program', '/program'),
-                  buildMenuItem('assets/struktural.png', 'Struktural', '/struktur'),
+                  buildMenuItem('assets/jadwal.png', 'Jadwal', '/jadwal', 40),
+                  buildMenuItem('assets/keuangan.png', 'Keuangan', '/keuangan', 40),
+                  buildMenuItem('assets/absen.png', 'Absen', '/absen_list', 40),
+                  buildMenuItem('assets/program.png', 'Program', '/program', 40),
                 ],
               ),
             ),
@@ -89,56 +122,56 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.green[300],
-        selectedItemColor: Colors.black,
+        backgroundColor: Colors.green,
+        selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white70,
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_home.png', width: 24, height: 24),
+            icon: Icon(Icons.home),
             label: 'Menu',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_mutasi.png', width: 24, height: 24),
+            icon: Icon(Icons.swap_horiz),
             label: 'Mutasi',
           ),
           BottomNavigationBarItem(
-            icon: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.black,
-                  width: 2,
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Image.asset(
-                  'assets/icon_qr_code.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            label: '',
+            icon: Icon(Icons.qr_code),
+            label: 'QR',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_info.png', width: 24, height: 24),
+            icon: Icon(Icons.info),
             label: 'Info',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('assets/icon_profile.png', width: 24, height: 24),
+            icon: Icon(Icons.account_circle),
             label: 'Profile',
           ),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped, // Call the function on tap
+        currentIndex: 0,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi');
+              break;
+            case 2:
+              Get.toNamed('/qrscan');
+              break;
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info');
+              break;
+            case 4:
+              Navigator.pushReplacementNamed(context, '/profil');
+              break;
+          }
+        },
       ),
     );
   }
 
-  Widget buildMenuItem(String assetPath, String label, String routeName) {
+  Widget buildMenuItem(String assetPath, String label, String routeName, double tinggi) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, routeName);
@@ -160,7 +193,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            child: Image.asset(assetPath, width: 40, height: 40),
+            child: Image.asset(assetPath, width: 40, height: tinggi),
           ),
           const SizedBox(height: 8),
           Text(label, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),

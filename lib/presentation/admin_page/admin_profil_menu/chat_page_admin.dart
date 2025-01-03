@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ChatPageAdmin extends StatefulWidget {
+  const ChatPageAdmin({super.key});
+
   @override
   _ChatPageAdminState createState() => _ChatPageAdminState();
 }

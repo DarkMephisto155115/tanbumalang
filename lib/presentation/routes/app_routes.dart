@@ -3,6 +3,7 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+  static const SPLASH = _Paths.SPLASH;
   static const HOME = _Paths.HOME;
   static const LOGIN = _Paths.LOGIN;
   static const REGISTRASI = _Paths.REGISTRASI;
@@ -16,6 +17,7 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const ABOUTUS = _Paths.ABOUTUS;
   static const ABSEN = _Paths.ABSEN;
+  static const ABSEN_LIST = _Paths.ABSEN_LIST;
   static const JADWAL = _Paths.JADWAL;
   static const KEUANGAN = _Paths.KEUANGAN;
   static const PEMBAYARAN_ASRAMA = _Paths.PEMBAYARAN_ASRAMA;
@@ -36,10 +38,14 @@ abstract class Routes {
   static const MUTASI_ADMIN = _Paths.MUTASI_ADMIN;
   static const ADMIN_PROGRAM_ADD_EDIT = _Paths.ADMIN_PROGRAM_ADD_EDIT;
   static const ADMIN_PROGRAM_LIST = _Paths.ADMIN_PROGRAM_LIST;
+  static const ABSEN_DETAIL_ADMIN = _Paths.ABSEN_DETAIL_ADMIN;
+  static const KEUANGAN_ADMIN = _Paths.KEUANGAN_ADMIN;
+
 }
 
 abstract class _Paths {
   _Paths._();
+  static const SPLASH = '/splash';
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const REGISTRASI = '/registrasi';
@@ -53,6 +59,7 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const ABOUTUS = '/aboutus';
   static const ABSEN = '/absen';
+  static const ABSEN_LIST = '/absen_list';
   static const JADWAL = '/jadwal';
   static const KEUANGAN = '/keuangan';
   static const PEMBAYARAN_ASRAMA = '/pembayaran_asrama';
@@ -63,6 +70,7 @@ abstract class _Paths {
   static const STRUKTUR = '/struktur';
   //ADMIN
   static const HOME_ADMIN = '/home_admin';
+  static const KEUANGAN_ADMIN = '/keuangan_admin';
   static const ABSEN_ADMIN = '/absen_admin';
   static const LOCATION = '/location';
   static const PROFIL_ADMIN = '/profil_admin';
@@ -73,4 +81,5 @@ abstract class _Paths {
   static const MUTASI_ADMIN = '/mutasi_admin';
   static const ADMIN_PROGRAM_ADD_EDIT = '/program_admin_crud';
   static const ADMIN_PROGRAM_LIST = '/program_admin_list';
+  static const ABSEN_DETAIL_ADMIN = '/absen_detail_admin';
 }

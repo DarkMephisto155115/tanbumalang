@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 
@@ -177,31 +178,50 @@ class LocationPage extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.green[400],
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.white,
-        items: [
-          const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          const BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Mutasi'),
+        backgroundColor: Colors.green,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        items: const [
           BottomNavigationBarItem(
-            icon: Container(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-                border: Border.all(color: Colors.black, width: 2),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(Icons.qr_code, color: Colors.black),
-              ),
-            ),
-            label: '',
+            icon: Icon(Icons.home),
+            label: 'Menu',
           ),
-          const BottomNavigationBarItem(icon: Icon(Icons.info), label: 'Info'),
-          const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.swap_horiz),
+            label: 'Mutasi',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.qr_code),
+            label: 'QR',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'Info',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
         ],
+        currentIndex: 0,
         onTap: (index) {
-          // Handle navigation
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home_admin');
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, '/mutasi_admin');
+              break;
+            case 2:
+              Get.toNamed('/qrscan');
+              break;
+            case 3:
+              Navigator.pushReplacementNamed(context, '/info_admin');
+              break;
+            case 4:
+              Navigator.pushReplacementNamed(context, '/profil_admin');
+              break;
+          }
         },
       ),
     );

@@ -1,18 +1,17 @@
 import 'package:get/get.dart';
-import 'package:tanbumalang/presentation/admin_page/admin_home_menu/absen_page_admin.dart';
+import 'package:tanbumalang/presentation/admin_page/admin_home_menu/absen/absen_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/admin_profil_menu/chat_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/home_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/info_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/mutasi_page_admin.dart';
 import 'package:tanbumalang/presentation/admin_page/profil_page_admin.dart';
 import 'package:tanbumalang/presentation/bindings/main_binding.dart';
-import 'package:tanbumalang/presentation/pages/home_menu/absen_page.dart';
+import 'package:tanbumalang/presentation/pages/home_menu/absen/absen_page.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/keuangan/keungan_page.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/keuangan/pembayaran_asrama.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/program/asrama_program_page.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/program/himpunan_program_page.dart';
 import 'package:tanbumalang/presentation/pages/home_menu/program/program_page.dart';
-import 'package:tanbumalang/presentation/pages/home_menu/struktural/struktur_page.dart';
 import 'package:tanbumalang/presentation/pages/home_page.dart';
 import 'package:tanbumalang/presentation/pages/info_page.dart';
 import 'package:tanbumalang/presentation/pages/login_page.dart';
@@ -22,48 +21,55 @@ import 'package:tanbumalang/presentation/pages/profil_menu/chat_page.dart';
 import 'package:tanbumalang/presentation/pages/profil_menu/lapor_page.dart';
 import 'package:tanbumalang/presentation/pages/profil_page.dart';
 import 'package:tanbumalang/presentation/pages/registration_page.dart';
+import 'package:tanbumalang/presentation/pages/splash_screen.dart';
 import 'package:tanbumalang/presentation/pages/verification_page.dart';
 
+import '../admin_page/admin_home_menu/absen/absen_page_detail.dart';
 import '../admin_page/admin_home_menu/admin_jadwal_page.dart';
+import '../admin_page/admin_home_menu/keuangan/admin_keuangan_page.dart';
 import '../admin_page/admin_home_menu/location_page.dart';
 import '../admin_page/admin_profil_menu/laporan_page.dart';
-// ignore: unused_import
-import '../admin_page/admin_program_add_edit_page.dart';
-import '../controller/admin/admin_jadwal_controller.dart';
+import '../admin_page/admin_home_menu/program/admin_program_add_edit_page.dart';
+import '../pages/home_menu/absen/absen_page_list.dart';
 import '../pages/home_menu/jadwal_page.dart';
 import '../pages/home_menu/keuangan/pembayaran_himpunan.dart';
 import '../pages/profil_menu/about_us_page.dart';
+import '../pages/qr_scanner_page.dart';
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
+      name: _Paths.SPLASH,
+      page: () => const SplashScreen(),
+    ),
+    GetPage(
       name: _Paths.HOME,
-      page: () => HomePage(),
+      page: () => const HomePage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginPage(),
+      page: () => const LoginPage(),
       binding: LoginBinding(),
     ),
     GetPage(
       name: _Paths.REGISTRASI,
-      page: () => RegistrationPage(),
+      page: () => const RegistrationPage(),
       binding: RegistrationBinding(),
     ),
     GetPage(
       name: _Paths.VERIFIKASI,
-      page: () => VerificationPage(),
+      page: () => const VerificationPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.MUTASI,
-      page: () => MutasiPage(),
+      page: () => const MutasiPage(),
       binding: MenuBinding(),
     ),
     GetPage(
@@ -73,14 +79,14 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFIL,
-      page: () => ProfilePage(),
+      page: () => const ProfilePage(),
       binding: MenuBinding(),
     ),
-    // GetPage(
-    //   name: _Paths.QRSCAN,
-    //   page: () => QRScannerPage(),
-    //   binding: MenuBinding(),
-    // ),
+    GetPage(
+      name: _Paths.QRSCAN,
+      page: () => const QRScannerPage(),
+      binding: MenuBinding(),
+    ),
     GetPage(
       name: _Paths.BIODATA,
       page: () => BiodataPage(),
@@ -98,7 +104,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ABOUTUS,
-      page: () => AboutUsPage(),
+      page: () => const AboutUsPage(),
       binding: MenuBinding(),
     ),
     GetPage(
@@ -108,54 +114,65 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ABSEN,
-      page: () => AbsenPage(),
+      page: () => const AbsenPage(formId: '',),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABSEN_LIST,
+      page: () => const AttendanceListPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.KEUANGAN,
-      page: () => KeuanganPage(),
+      page: () => const KeuanganPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.PEMBAYARAN_ASRAMA,
-      page: () => PembayaranAsramaPage(),
+      page: () => const PembayaranAsramaPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.PEMBAYARAN_HIMPUNAN,
-      page: () => PembayaranHimpunanPage(),
+      page: () => const PembayaranHimpunanPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.PROGRAM,
-      page: () => ProgramPage(),
+      page: () => const ProgramPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.PROGRAM_ASRAMA,
-      page: () => AsramaProgramPage(),
+      page: () => const AsramaProgramPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.PROGRAM_HIMPUNAN,
-      page: () => HimpunanProgramPage(),
+      page: () => const HimpunanProgramPage(),
       binding: MenuBinding(),
     ),
-    GetPage(
-      name: _Paths.STRUKTUR,
-      page: () => StrukturPage(),
-      binding: MenuBinding(),
-    ),
+
 
     //ADMIN
     GetPage(
       name: _Paths.HOME_ADMIN,
-      page: () => HomePageAdmin(),
+      page: () => const HomePageAdmin(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.KEUANGAN_ADMIN,
+      page: () => const KeuanganAdminPage(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.ABSEN_ADMIN,
-      page: () => AbsenPageAdmin(),
+      page: () => const AdminAttendancePage(),
+      binding: MenuBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABSEN_DETAIL_ADMIN,
+      page: () => const AdminFormDetailPage(formId: '',),
       binding: MenuBinding(),
     ),
     GetPage(
@@ -170,12 +187,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT_ADMIN,
-      page: () => ChatPageAdmin(),
+      page: () => const ChatPageAdmin(),
       binding: MenuBinding(),
     ),
     GetPage(
       name: _Paths.LAPORAN,
-      page: () => LaporanUserPage(),
+      page: () => const LaporanUserPage(),
       binding: MenuBinding(),
     ),
     GetPage(
@@ -195,7 +212,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ADMIN_PROGRAM_LIST,
-      page: () => AdminProgramListPage(),
+      page: () => const AdminProgramListPage(),
       binding:
       MenuBinding(), // Anda bisa membuat binding khusus jika diperlukan
     ),

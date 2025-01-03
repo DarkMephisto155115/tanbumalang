@@ -5,6 +5,8 @@ import '../routes/app_pages.dart';
 
 
 class VerificationPage extends StatelessWidget {
+  const VerificationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

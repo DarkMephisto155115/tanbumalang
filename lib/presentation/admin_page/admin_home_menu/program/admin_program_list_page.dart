@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
-class AdminProgramAddEditPagee extends StatefulWidget {
+
+class AdminProgramListPage extends StatefulWidget {
+  const AdminProgramListPage({super.key});
+
   @override
   _AdminProgramAddEditPageState createState() => _AdminProgramAddEditPageState();
 }
 
-class _AdminProgramAddEditPageState extends State<AdminProgramAddEditPagee> {
+class _AdminProgramAddEditPageState extends State<AdminProgramListPage> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _imageUrlController = TextEditingController();
@@ -16,11 +20,12 @@ class _AdminProgramAddEditPageState extends State<AdminProgramAddEditPagee> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    if (args != null && args['programData'] != null) {
+    // Menggunakan Get.arguments untuk mendapatkan data yang diteruskan
+    final args = Get.arguments as Map<String, dynamic>?;
+    if (args != null) {
       _programId = args['programId'];
-      _titleController.text = args['programData']['title'] ?? '';
-      _imageUrlController.text = args['programData']['imageUrl'] ?? '';
+      _titleController.text = args['programData']?['title'] ?? '';
+      _imageUrlController.text = args['programData']?['imageUrl'] ?? '';
       _selectedProgramType = args['programType'];
     }
   }
@@ -75,33 +80,51 @@ class _AdminProgramAddEditPageState extends State<AdminProgramAddEditPagee> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
-                  if (_formKey.currentState!.validate() && _selectedProgramType != null) {
+                  if (_formKey.currentState!.validate() &&
+                      _selectedProgramType != null) {
                     try {
                       final programData = {
                         'title': _titleController.text,
                         'imageUrl': _imageUrlController.text,
                       };
 
-                      String collectionName = 'program$_selectedProgramType';
+                      String collectionName =
+                          'program$_selectedProgramType';
 
                       if (_programId == null) {
                         // Tambah program baru
-                        await FirebaseFirestore.instance.collection(collectionName).add(programData);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Program berhasil ditambahkan.')),
+                        await FirebaseFirestore.instance
+                            .collection(collectionName)
+                            .add(programData);
+                        Get.snackbar(
+                          'Sukses',
+                          'Program berhasil ditambahkan.',
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.green,
+                          colorText: Colors.white,
                         );
                       } else {
                         // Edit program yang ada
-                        await FirebaseFirestore.instance.collection(collectionName).doc(_programId).update(programData);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Program berhasil diupdate.')),
+                        await FirebaseFirestore.instance
+                            .collection(collectionName)
+                            .doc(_programId)
+                            .update(programData);
+                        Get.snackbar(
+                          'Sukses',
+                          'Program berhasil diupdate.',
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: Colors.green,
+                          colorText: Colors.white,
                         );
                       }
-                      Navigator.pop(context); // Kembali ke halaman admin program
+                      Get.back(); // Kembali ke halaman admin program
                     } catch (e) {
-                      print('Error saving program: $e');
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Gagal menyimpan program.')),
+                      Get.snackbar(
+                        'Gagal',
+                        'Gagal menyimpan program.',
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.red,
+                        colorText: Colors.white,
                       );
                     }
                   }

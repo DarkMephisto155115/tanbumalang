@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class JadwalController extends GetxController {
-  // Collection reference to the "jadwal" collection in Firestore
   final CollectionReference jadwalCollection = FirebaseFirestore.instance.collection('jadwal');
 
-  // Controllers for title and date input fields
   var titleController = TextEditingController();
   var dateController = TextEditingController();
+  var descriptionController = TextEditingController();
 
-  // Method to add a new "jadwal" to Firestore
   Future<void> addJadwal() async {
-    if (titleController.text.isNotEmpty && dateController.text.isNotEmpty) {
+    if (titleController.text.isNotEmpty &&
+        dateController.text.isNotEmpty &&
+        descriptionController.text.isNotEmpty) {
       try {
         await jadwalCollection.add({
           'title': titleController.text,
           'date': dateController.text,
+          'description': descriptionController.text,
         });
         Get.snackbar(
           'Success',
@@ -25,9 +26,9 @@ class JadwalController extends GetxController {
           backgroundColor: Colors.green,
           colorText: Colors.white,
         );
-        // Clear text fields after successful addition
         titleController.clear();
         dateController.clear();
+        descriptionController.clear();
       } catch (e) {
         Get.snackbar(
           'Error',
