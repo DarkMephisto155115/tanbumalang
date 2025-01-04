@@ -28,9 +28,12 @@ class _AdminAttendancePageState extends State<AdminAttendancePage> {
 
     try {
       // Create the form in Firestore
-
-      setState(() {
+      await FirebaseFirestore.instance.collection('forms').add({
+        'title': _titleController.text,
+        'timestamp': FieldValue.serverTimestamp(),
       });
+
+      _titleController.clear();  // Clear the input after successful creation.
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Form absensi berhasil dibuat!")),
